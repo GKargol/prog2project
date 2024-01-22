@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" type="text/css" href="style.css" />
+
+    <title>Submit Data to MongoDB</title>
+  </head>
+  <body>
+    <h1>Submit Data to MongoDB</h1>
+    <form action="/submit" method="post" onsubmit="submitForm(); return false;">
+      <label for="question1">Question 1:</label>
+      <input
+        type="text"
+        id="question1"
+        name="question1"
+        placeholder="Enter question title"
+        required
+      />
+
+      <label for="question2">Question 2:</label>
+      <input
+        type="text"
+        id="question2"
+        name="question2"
+        placeholder="Enter question title"
+        required
+      />
+
+      <label for="question3">Question 3:</label>
+      <input
+        type="text"
+        id="question3"
+        name="question3"
+        placeholder="Enter question title"
+        required
+      />
+
+      <button type="submit">Submit</button>
+    </form>
+
+    <script>
+      async function submitForm() {
+        const form = document.querySelector("form");
+        const formData = new FormData(form);
+
+        const data = {
+          question1: formData.get("question1"),
+          question2: formData.get("question2"),
+          question3: formData.get("question3"),
+        };
+
+        try {
+          const response = await fetch("/submit", {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify(data),
+          });
+
+          if (response.ok) {
+            alert("Data submitted to MongoDB successfully");
+            form.reset(); // Optionally, reset the form
+          } else {
+            alert("Failed to submit data to MongoDB");
+          }
+        } catch (error) {
+          console.error(error);
+          alert("An error occurred while submitting the form.");
+        }
+      }
+    </script>
+  </body>
+</html>
