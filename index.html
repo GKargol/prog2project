@@ -3,66 +3,148 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="stylesheet" type="text/css" href="style.css" />
-
-    <title>Submit Data to MongoDB</title>
+    <title>Modern Form</title>
+    <link rel="stylesheet" href="style.css" />
   </head>
   <body>
-    <h1>Submit Data to MongoDB</h1>
-    <form action="/submit" method="post" onsubmit="submitForm(); return false;">
-      <label for="question1">Question 1:</label>
-      <input
-        type="text"
-        id="question1"
-        name="question1"
-        placeholder="Enter question title"
-        required
-      />
+    <div class="container">
+      <h1>Submit Your Answers</h1>
+      <form action="/submit" method="post" onsubmit="return validateForm();">
+        <!-- Question 1 -->
+        <div class="question-container">
+          <label for="question1">Question 1:</label>
+          <input
+            type="text"
+            id="question1"
+            name="question1"
+            placeholder="Your answer"
+            required
+          />
+          <span class="error-message" id="question1Error"></span>
+        </div>
 
-      <label for="question2">Question 2:</label>
-      <input
-        type="text"
-        id="question2"
-        name="question2"
-        placeholder="Enter question title"
-        required
-      />
+        <!-- Question 2 -->
+        <div class="question-container">
+          <label for="question2">Question 2:</label>
+          <input
+            type="text"
+            id="question2"
+            name="question2"
+            placeholder="Your answer"
+            required
+          />
+          <span class="error-message" id="question2Error"></span>
+        </div>
 
-      <label for="question3">Question 3:</label>
-      <input
-        type="text"
-        id="question3"
-        name="question3"
-        placeholder="Enter question title"
-        required
-      />
+        <!-- Question 3 -->
+        <div class="question-container">
+          <label for="question3">Question 3:</label>
+          <input
+            type="text"
+            id="question3"
+            name="question3"
+            placeholder="Your answer"
+            required
+          />
+          <span class="error-message" id="question3Error"></span>
+        </div>
 
-      <button type="submit">Submit</button>
-    </form>
+        <!-- Question 4 -->
+        <div class="question-container">
+          <label for="question4">Question 4:</label>
+          <input
+            type="text"
+            id="question4"
+            name="question4"
+            placeholder="Your answer"
+            required
+          />
+          <span class="error-message" id="question4Error"></span>
+        </div>
+
+        <!-- Question 5 -->
+        <div class="question-container">
+          <label for="question5">Question 5:</label>
+          <input
+            type="text"
+            id="question5"
+            name="question5"
+            placeholder="Your answer"
+            required
+          />
+          <span class="error-message" id="question5Error"></span>
+        </div>
+
+        <!-- Question 6 -->
+        <div class="question-container">
+          <label for="question6">Question 6:</label>
+          <input
+            type="text"
+            id="question6"
+            name="question6"
+            placeholder="Your answer"
+            required
+          />
+          <span class="error-message" id="question6Error"></span>
+        </div>
+
+        <button type="submit">Submit</button>
+      </form>
+    </div>
 
     <script>
+      function validateForm() {
+        let hasError = false;
+
+        const form = document.querySelector("form");
+        const inputElements = form.querySelectorAll("input[type='text']");
+
+        inputElements.forEach((input) => {
+          const questionValue = input.value.trim();
+          const errorElement = document.getElementById(`${input.id}Error`);
+          if (questionValue === "") {
+            errorElement.textContent = "Please fill out this field";
+            hasError = true;
+          } else if (questionValue.includes(" ")) {
+            errorElement.textContent = "Spaces are not allowed";
+            hasError = true;
+          } else {
+            errorElement.textContent = "";
+          }
+        });
+
+        if (!hasError) {
+          submitForm(); // Call the submitForm function if there are no errors
+        }
+
+        return false; // Prevent the form from actually submitting
+      }
+
       async function submitForm() {
         const form = document.querySelector("form");
-        const formData = new FormData(form);
+        const inputElements = form.querySelectorAll("input[type='text']");
+        const questions = [];
 
-        const data = {
-          question1: formData.get("question1"),
-          question2: formData.get("question2"),
-          question3: formData.get("question3"),
-        };
+        inputElements.forEach((input) => {
+          const questionId = input.id;
+          const questionValue = input.value.trim();
+          questions.push({ id: questionId, value: questionValue });
+        });
+
+        const formData = JSON.stringify({ questions });
 
         try {
           const response = await fetch("/submit", {
             method: "POST",
+            body: formData,
             headers: {
-              "Content-Type": "application/json",
+              "Content-Type": "application/json", // Set the content type to JSON
             },
-            body: JSON.stringify(data),
           });
 
           if (response.ok) {
-            alert("Data submitted to MongoDB successfully");
-            form.reset(); // Optionally, reset the form
+            form.reset();
+            window.location.href = "/submit.html"; // Redirect to /submit.html upon success
           } else {
             alert("Failed to submit data to MongoDB");
           }
