@@ -3,12 +3,13 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Modern Form</title>
+    <title>Performance Report</title>
     <link rel="stylesheet" href="style.css" />
   </head>
   <body>
     <div class="container">
-      <h1>Submit Your Answers</h1>
+      <h1>Performance Report House53</h1>
+      <h2>Section 1: Background and Goals</h2>
       <form action="/submit" method="post" onsubmit="return validateForm();">
         <!-- Question 1 -->
         <div class="question-container">
@@ -88,6 +89,62 @@
           <span class="error-message" id="question6Error"></span>
         </div>
 
+         <!-- Question 7 -->
+        <div class="question-container">
+          <label for="question7">Email:</label>
+          <input
+            type="text"
+            id="question7"
+            name="question7"
+            placeholder="Your answer"
+            required
+          />
+          <span class="error-message" id="question7Error"></span>
+        </div>
+
+        <!-- Question 8 -->
+        <div class="question-container">
+          <label for="question8">Hdep:</label>
+          <input
+            type="text"
+            id="question8"
+            name="question8"
+            placeholder="Your answer"
+            required
+          />
+          <span class="error-message" id="question8Error"></span>
+        </div>
+
+        <!-- Question 9 -->
+        <div class="question-container">
+          <label for="question9">Best Finish Last Season:</label>
+          <input
+            type="text"
+            id="question9"
+            name="question9"
+            placeholder="Your answer"
+            required
+          />
+          <span class="error-message" id="question9Error"></span>
+        </div>
+
+        <!-- Question 10 -->
+        <div class="question-container">
+          <label for="question7">Low Score Last Season:</label>
+          <input
+            type="text"
+            id="question10"
+            name="question10"
+            placeholder="Your answer"
+            required
+          />
+          <span class="error-message" id="question10Error"></span>
+        </div>
+
+        <button type="submit">Submit</button>
+      </form>
+    </div>
+    
         <button type="submit">Submit</button>
       </form>
     </div>
