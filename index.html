@@ -9,205 +9,236 @@
   <body>
     <div class="container">
       <h1>Performance Report House53</h1>
-      <h2>Section 1: Background and Goals</h2>
-      <form action="/submit" method="post" onsubmit="return validateForm();">
-        <!-- Question 1 -->
-        <div class="question-container">
-          <label for="question1">Question 1:</label>
-          <input
-            type="text"
-            id="question1"
-            name="question1"
-            placeholder="Your answer"
-            required
-          />
-          <span class="error-message" id="question1Error"></span>
-        </div>
+      <div id="section1" class="form-section">
+        <h2>Section 1: Background and Goals</h2>
+        <form>
+          <!-- Question 1 -->
+          <div class="question-container">
+            <label for="question1">Question 1:</label>
+            <input
+              type="text"
+              id="question1"
+              name="question1"
+              placeholder="Your answer"
+              required
+            />
+            <span class="error-message" id="question1Error"></span>
+          </div>
 
-        <!-- Question 2 -->
-        <div class="question-container">
-          <label for="question2">Question 2:</label>
-          <input
-            type="text"
-            id="question2"
-            name="question2"
-            placeholder="Your answer"
-            required
-          />
-          <span class="error-message" id="question2Error"></span>
-        </div>
+          <!-- Question 2 -->
+          <div class="question-container">
+            <label for="question2">Question 2:</label>
+            <input
+              type="text"
+              id="question2"
+              name="question2"
+              placeholder="Your answer"
+              required
+            />
+            <span class="error-message" id="question2Error"></span>
+          </div>
 
-        <!-- Question 3 -->
-        <div class="question-container">
-          <label for="question3">Question 3:</label>
-          <input
-            type="text"
-            id="question3"
-            name="question3"
-            placeholder="Your answer"
-            required
-          />
-          <span class="error-message" id="question3Error"></span>
-        </div>
+          <!-- Question 3 -->
+          <div class="question-container">
+            <label for="question3">Question 3:</label>
+            <input
+              type="text"
+              id="question3"
+              name="question3"
+              placeholder="Your answer"
+              required
+            />
+            <span class="error-message" id="question3Error"></span>
+          </div>
 
-        <!-- Question 4 -->
-        <div class="question-container">
-          <label for="question4">Question 4:</label>
-          <input
-            type="text"
-            id="question4"
-            name="question4"
-            placeholder="Your answer"
-            required
-          />
-          <span class="error-message" id="question4Error"></span>
-        </div>
+          <!-- Question 4 -->
+          <div class="question-container">
+            <label for="question4">Question 4:</label>
+            <input
+              type="text"
+              id="question4"
+              name="question4"
+              placeholder="Your answer"
+              required
+            />
+            <span class="error-message" id="question4Error"></span>
+          </div>
 
-        <!-- Question 5 -->
-        <div class="question-container">
-          <label for="question5">Question 5:</label>
-          <input
-            type="text"
-            id="question5"
-            name="question5"
-            placeholder="Your answer"
-            required
-          />
-          <span class="error-message" id="question5Error"></span>
-        </div>
+          <!-- Question 5 -->
+          <div class="question-container">
+            <label for="question5">Question 5:</label>
+            <input
+              type="text"
+              id="question5"
+              name="question5"
+              placeholder="Your answer"
+              required
+            />
+            <span class="error-message" id="question5Error"></span>
+          </div>
 
-        <!-- Question 6 -->
-        <div class="question-container">
-          <label for="question6">Question 6:</label>
-          <input
-            type="text"
-            id="question6"
-            name="question6"
-            placeholder="Your answer"
-            required
-          />
-          <span class="error-message" id="question6Error"></span>
-        </div>
+          <button type="button" onclick="showSection('section2')">Next</button>
+        </form>
+      </div>
 
-         <!-- Question 7 -->
-        <div class="question-container">
-          <label for="question7">Email:</label>
-          <input
-            type="text"
-            id="question7"
-            name="question7"
-            placeholder="Your answer"
-            required
-          />
-          <span class="error-message" id="question7Error"></span>
-        </div>
+      <div id="section2" class="form-section" style="display: none">
+        <h2>Section 2: Additional Questions</h2>
+        <form>
+          <!-- Question 6 -->
+          <div class="question-container">
+            <label for="question6">Question 6:</label>
+            <input
+              type="text"
+              id="question6"
+              name="question6"
+              placeholder="Your answer"
+              required
+            />
+            <span class="error-message" id="question6Error"></span>
+          </div>
 
-        <!-- Question 8 -->
-        <div class="question-container">
-          <label for="question8">Hdep:</label>
-          <input
-            type="text"
-            id="question8"
-            name="question8"
-            placeholder="Your answer"
-            required
-          />
-          <span class="error-message" id="question8Error"></span>
-        </div>
+          <!-- Question 7 -->
+          <div class="question-container">
+            <label for="question7">Question 7:</label>
+            <input
+              type="text"
+              id="question7"
+              name="question7"
+              placeholder="Your answer"
+              required
+            />
+            <span class="error-message" id="question7Error"></span>
+          </div>
 
-        <!-- Question 9 -->
-        <div class="question-container">
-          <label for="question9">Best Finish Last Season:</label>
-          <input
-            type="text"
-            id="question9"
-            name="question9"
-            placeholder="Your answer"
-            required
-          />
-          <span class="error-message" id="question9Error"></span>
-        </div>
+          <!-- Question 8 -->
+          <div class="question-container">
+            <label for="question8">Question 8:</label>
+            <input
+              type="text"
+              id="question8"
+              name="question8"
+              placeholder="Your answer"
+              required
+            />
+            <span class="error-message" id="question8Error"></span>
+          </div>
 
-        <!-- Question 10 -->
-        <div class="question-container">
-          <label for="question7">Low Score Last Season:</label>
-          <input
-            type="text"
-            id="question10"
-            name="question10"
-            placeholder="Your answer"
-            required
-          />
-          <span class="error-message" id="question10Error"></span>
-        </div>
+          <!-- Question 9 -->
+          <div class="question-container">
+            <label for="question9">Question 9:</label>
+            <input
+              type="text"
+              id="question9"
+              name="question9"
+              placeholder="Your answer"
+              required
+            />
+            <span class="error-message" id="question9Error"></span>
+          </div>
 
-        <button type="submit">Submit</button>
-      </form>
-    </div>
-    
-        <button type="submit">Submit</button>
-      </form>
+          <!-- Question 10 -->
+          <div class="question-container">
+            <label for="question10">Question 10:</label>
+            <input
+              type="text"
+              id="question10"
+              name="question10"
+              placeholder="Your answer"
+              required
+            />
+            <span class="error-message" id="question10Error"></span>
+          </div>
+
+          <button type="button" onclick="showSection('section1')">
+            Previous
+          </button>
+          <button type="button" onclick="showSection('section3')">Next</button>
+        </form>
+      </div>
+
+      <div id="section3" class="form-section" style="display: none">
+        <h2>Section 3: Final Questions</h2>
+        <form>
+          <!-- Add more questions for section 3 if needed -->
+
+          <button type="button" onclick="showSection('section2')">
+            Previous
+          </button>
+          <button type="button" onclick="submitForm()">Submit</button>
+        </form>
+      </div>
     </div>
 
     <script>
-      function validateForm() {
-        let hasError = false;
-
-        const form = document.querySelector("form");
-        const inputElements = form.querySelectorAll("input[type='text']");
-
-        inputElements.forEach((input) => {
-          const questionValue = input.value.trim();
-          const errorElement = document.getElementById(`${input.id}Error`);
-          if (questionValue === "") {
-            errorElement.textContent = "Please fill out this field";
-            hasError = true;
-          } else if (questionValue.includes(" ")) {
-            errorElement.textContent = "Spaces are not allowed";
-            hasError = true;
+      function showSection(sectionId) {
+        const sections = document.querySelectorAll(".form-section");
+        sections.forEach((section) => {
+          if (section.id === sectionId) {
+            section.style.display = "block";
           } else {
-            errorElement.textContent = "";
+            section.style.display = "none";
           }
         });
-
-        if (!hasError) {
-          submitForm(); // Call the submitForm function if there are no errors
-        }
-
-        return false; // Prevent the form from actually submitting
       }
 
       async function submitForm() {
-        const form = document.querySelector("form");
-        const inputElements = form.querySelectorAll("input[type='text']");
-        const questions = [];
+        let hasError = false;
 
-        inputElements.forEach((input) => {
-          const questionId = input.id;
-          const questionValue = input.value.trim();
-          questions.push({ id: questionId, value: questionValue });
+        // Reset error messages
+        const errorMessages = document.querySelectorAll(".error-message");
+        errorMessages.forEach((errorMessage) => {
+          errorMessage.textContent = "";
         });
 
-        const formData = JSON.stringify({ questions });
+        // Validate form inputs
+        const formSections = document.querySelectorAll(".form-section");
+        formSections.forEach((section) => {
+          const inputElements = section.querySelectorAll("input[type='text']");
+          inputElements.forEach((input) => {
+            const questionValue = input.value.trim();
+            const errorElement = document.getElementById(`${input.id}Error`);
+            if (questionValue === "") {
+              errorElement.textContent = "Please fill out this field";
+              hasError = true;
+            }
+          });
+        });
 
-        try {
-          const response = await fetch("/submit", {
-            method: "POST",
-            body: formData,
-            headers: {
-              "Content-Type": "application/json", // Set the content type to JSON
-            },
+        if (!hasError) {
+          const formData = [];
+          formSections.forEach((section) => {
+            const inputElements =
+              section.querySelectorAll("input[type='text']");
+            inputElements.forEach((input) => {
+              const questionId = input.id;
+              const questionValue = input.value.trim();
+              formData.push({ id: questionId, value: questionValue });
+            });
           });
 
-          if (response.ok) {
-            form.reset();
-            window.location.href = "/submit.html"; // Redirect to /submit.html upon success
-          } else {
-            alert("Failed to submit data to MongoDB");
+          try {
+            const response = await fetch("/submit", {
+              method: "POST",
+              body: JSON.stringify({ questions: formData }),
+              headers: {
+                "Content-Type": "application/json",
+              },
+            });
+
+            if (response.ok) {
+              formSections.forEach((section) => {
+                section.querySelector("form").reset();
+              });
+              window.location.href = "/submit.html"; // Redirect to submit.html upon successful submission
+            } else {
+              alert("Failed to submit data to MongoDB");
+            }
+          } catch (error) {
+            console.error(error);
+            alert("An error occurred while submitting the form.");
           }
-        } catch (error) {
-          console.error(error);
-          alert("An error occurred while submitting the form.");
+        } else {
+          alert("Please fill out all required fields.");
         }
       }
     </script>
