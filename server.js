@@ -15,15 +15,6 @@ app.use(express.static(__dirname));
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 
-// Get the MongoDB URI from environment variables
-const uri = process.env.MONGODB_URI;
-
-// Create a MongoDB client with connection options
-const client = new MongoClient(uri, {
-  useNewUrlParser: true,
-  useUnifiedTopology: true,
-});
-
 // Handle GET requests to the root ("/") route
 app.get("/", (req, res) => {
   // Serve the index.html file as the main page
@@ -32,12 +23,22 @@ app.get("/", (req, res) => {
 
 // Handle POST requests to the "/submit" route
 app.post("/submit", async (req, res) => {
+  let client; // Declare the client variable outside the try block
+
   try {
+    // Get the MongoDB URI from environment variables
+    const uri = process.env.MONGODB_URI;
+
+    // Create a MongoDB client with connection options
+    client = new MongoClient(uri, {
+      useNewUrlParser: true,
+    });
+
     // Connect to the MongoDB server
     await client.connect();
 
     // Get the MongoDB collection to store data
-    const collection = client.db("test").collection("notes");
+    const collection = client.db("test").collection("formdatas");
 
     // Get the submitted questions as an array
     const questions = req.body.questions;
@@ -53,8 +54,10 @@ app.post("/submit", async (req, res) => {
     // Respond with a JSON error message for database errors
     res.status(500).json({ error: "Database error" });
   } finally {
-    // Close the MongoDB client connection
-    client.close();
+    if (client) {
+      // Close the MongoDB client connection if it's defined
+      client.close();
+    }
   }
 });
 
