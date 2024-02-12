@@ -7,8 +7,18 @@ Base Target: shaweliteinstruction.com
 
 - To start testing, use `node server.js` to open a local port via express. "Go Live" plugin will not work due to listing on a different port.
 
+## Current Dependencies 
+Can make this easy with `npm install`
+### List
+├── body-parser@1.20.2
+├── chai@5.0.0
+├── ejs@3.1.9
+├── express@4.18.2
+├── mocha@10.2.0
+├── mongodb@6.3.0
+└── mongoose@8.0.4
+
 ### Todo List
-- Create seperate HTML pages for different sections in performance report. Or, find a way to have pages feature in one HTML file. | Completed ✅
-- Format all the pages to still look good | Completed ✅
-- Add date/email formatting to relevant text boxes' 
-- Create collections for each section for easier submitting and saving of data. All helps with recall.
+
+- Formatting and finalize dashboard
+- Other formatting and cleaning comments
