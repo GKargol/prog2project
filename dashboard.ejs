@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <a href="/" class="btn-back">Back to Form</a>
+    <title>Dashboard</title>
+    <link rel="stylesheet" href="style.css" />
+    <!-- Include your CSS file -->
+    <style>
+      /* Additional CSS styles for better formatting */
+      #answerContainer {
+        max-width: 600px;
+        margin: 20px auto;
+        padding: 20px;
+        background-color: #f5f5f5;
+        border-radius: 8px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+      }
+
+      h1 {
+        text-align: center;
+      }
+
+      .answer {
+        margin-top: 20px;
+      }
+
+      .answer p {
+        margin-bottom: 10px;
+      }
+
+      input[type="number"] {
+        width: 100px;
+        padding: 8px;
+        margin-right: 10px;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+        font-size: 16px;
+      }
+
+      button {
+        background-color: #0078d4;
+        color: #fff;
+        border: none;
+        border-radius: 4px;
+        padding: 10px 20px;
+        font-size: 16px;
+        cursor: pointer;
+      }
+
+      button:hover {
+        background-color: #005a9e;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>Form Answers Dashboard</h1>
+
+    <div id="answerContainer">
+      <% if (formResponses.length > 0) { %> <% if (currentIndex >= 0 &&
+      currentIndex < formResponses.length &&
+      formResponses[currentIndex].questions) { %>
+      <h2>Currently Viewing: <%= formResponses[currentIndex]._id %></h2>
+      <div class="answer">
+        <% formResponses[currentIndex].questions.forEach(question => { %>
+        <p><strong>Question ID:</strong> <%= question.id %></p>
+        <p><strong>Answer:</strong> <%= question.value %></p>
+        <hr />
+        <% }); %>
+      </div>
+      <% } else { %>
+      <p>No form answers available for the selected index.</p>
+      <% } %>
+      <!-- Navigation controls -->
+      <div>
+        <input
+          type="number"
+          id="responseIndex"
+          min="0"
+          max="<%= formResponses.length - 1 %>"
+          placeholder="Enter response index"
+        />
+        <button onclick="changeResponse()">View Response</button>
+      </div>
+      <% } else { %>
+      <p>No form answers available.</p>
+      <% } %>
+    </div>
+
+    <script>
+      function changeResponse() {
+        const index = document.getElementById("responseIndex").value;
+        // Redirect to the dashboard page with the selected index as a query parameter
+        window.location.href = `/dashboard?currentIndex=${index}`;
+      }
+    </script>
+  </body>
+</html>
