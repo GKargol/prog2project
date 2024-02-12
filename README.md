@@ -10,15 +10,15 @@ Base Target: shaweliteinstruction.com
 ## Current Dependencies 
 Can make this easy with `npm install`
 ### List
-├── body-parser@1.20.2
-├── chai@5.0.0
-├── ejs@3.1.9
-├── express@4.18.2
-├── mocha@10.2.0
-├── mongodb@6.3.0
-└── mongoose@8.0.4
+- body-parser@1.20.2
+-  chai@5.0.0
+-  ejs@3.1.9
+-  epress@4.18.2
+-  mocha@10.2.0
+-  mongodb@6.3.0
+-  mongoose@8.0.4
 
-### Todo List
+## Todo List
 
 - Formatting and finalize dashboard
 - Other formatting and cleaning comments
