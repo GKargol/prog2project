@@ -14,6 +14,18 @@ const port = 3000;
 app.use(express.static(__dirname));
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
+app.set("view engine", "ejs"); // Set EJS as the view engine
+app.set("views", __dirname); // Set the views directory to the current directory
+
+// MongoDB URI
+const uri = process.env.MONGODB_URI;
+
+// Function to connect to MongoDB
+async function connectToDatabase() {
+  const client = new MongoClient(uri);
+  await client.connect();
+  return client.db("test").collection("formdatas");
+}
 
 // Handle GET requests to the root ("/") route
 app.get("/", (req, res) => {
@@ -23,22 +35,9 @@ app.get("/", (req, res) => {
 
 // Handle POST requests to the "/submit" route
 app.post("/submit", async (req, res) => {
-  let client; // Declare the client variable outside the try block
-
   try {
-    // Get the MongoDB URI from environment variables
-    const uri = process.env.MONGODB_URI;
-
-    // Create a MongoDB client with connection options
-    client = new MongoClient(uri, {
-      useNewUrlParser: true,
-    });
-
-    // Connect to the MongoDB server
-    await client.connect();
-
-    // Get the MongoDB collection to store data
-    const collection = client.db("test").collection("formdatas");
+    // Connect to MongoDB
+    const collection = await connectToDatabase();
 
     // Get the submitted questions as an array
     const questions = req.body.questions;
@@ -53,11 +52,33 @@ app.post("/submit", async (req, res) => {
     console.error(err);
     // Respond with a JSON error message for database errors
     res.status(500).json({ error: "Database error" });
-  } finally {
-    if (client) {
-      // Close the MongoDB client connection if it's defined
-      client.close();
-    }
+  }
+});
+
+// Handle GET requests to the "/dashboard" route
+app.get("/dashboard", async (req, res) => {
+  try {
+    // Connect to MongoDB
+    const collection = await connectToDatabase();
+
+    // Fetch all documents from the collection
+    const formResponses = await collection.find({}).toArray();
+
+    // Get the currentIndex from the query string, default to 0 if not provided
+    const currentIndex = req.query.currentIndex
+      ? parseInt(req.query.currentIndex)
+      : 0;
+
+    // Render the dashboard page with the fetched data and currentIndex
+    res.render("dashboard.ejs", {
+      formResponses: formResponses,
+      currentIndex: currentIndex,
+    });
+  } catch (err) {
+    // Handle any errors that occur during database operations
+    console.error(err);
+    // Respond with a JSON error message for database errors
+    res.status(500).json({ error: "Database error" });
   }
 });
 
