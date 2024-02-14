@@ -7,11 +7,12 @@
     <link rel="stylesheet" href="style.css" />
   </head>
   <body>
-     <!-- Add a container for the dashboard button -->
-    <div class="dashboard-button-container">
-      <a href="/dashboard" class="dashboard-button">Dashboard</a>
+    <!-- Add a container for the dashboard button -->
+    <div class="button-container">
+      <a href="/dashboard">Dashboard</a>
+      <button id="theme-toggle">Toggle Dark Mode</button>
     </div>
-    
+
     <div class="container">
       <h1>Performance Report House53</h1>
       <div id="section1" class="form-section">
@@ -162,7 +163,9 @@
 
           <!-- Question 12 -->
           <div class="question-container">
-            <label for="question5">First 3 Month Benchmarks - Golf Instructor:</label>
+            <label for="question5"
+              >First 3 Month Benchmarks - Golf Instructor:</label
+            >
             <input
               type="text"
               id="question12"
@@ -350,6 +353,26 @@
           alert("Please fill out all required fields.");
         }
       }
+    </script>
+    <script>
+      // Check if dark mode preference is stored in local storage
+      const isDarkMode = localStorage.getItem("darkMode") === "true";
+
+      // Set initial dark mode state based on the stored preference
+      if (isDarkMode) {
+        document.body.classList.add("dark-mode");
+      }
+
+      const themeToggle = document.getElementById("theme-toggle");
+
+      themeToggle.addEventListener("click", () => {
+        // Toggle dark mode class on the body element
+        document.body.classList.toggle("dark-mode");
+
+        // Store the dark mode preference in local storage
+        const isDarkMode = document.body.classList.contains("dark-mode");
+        localStorage.setItem("darkMode", isDarkMode.toString());
+      });
     </script>
   </body>
 </html>
