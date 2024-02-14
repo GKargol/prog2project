@@ -3,91 +3,71 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <a href="/" class="btn-back">Back to Form</a>
     <title>Dashboard</title>
     <link rel="stylesheet" href="style.css" />
-    <!-- Include your CSS file -->
-    <style>
-      /* Additional CSS styles for better formatting */
-      #answerContainer {
-        max-width: 600px;
-        margin: 20px auto;
-        padding: 20px;
-        background-color: #f5f5f5;
-        border-radius: 8px;
-        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-      }
-
-      h1 {
-        text-align: center;
-      }
-
-      .answer {
-        margin-top: 20px;
-      }
-
-      .answer p {
-        margin-bottom: 10px;
-      }
-
-      input[type="number"] {
-        width: 100px;
-        padding: 8px;
-        margin-right: 10px;
-        border: 1px solid #ccc;
-        border-radius: 4px;
-        font-size: 16px;
-      }
-
-      button {
-        background-color: #0078d4;
-        color: #fff;
-        border: none;
-        border-radius: 4px;
-        padding: 10px 20px;
-        font-size: 16px;
-        cursor: pointer;
-      }
-
-      button:hover {
-        background-color: #005a9e;
-      }
-    </style>
   </head>
+  <div class="button-container">
+    <a href="/" class="btn-back">Back to Form</a>
+    <button id="theme-toggle">Toggle Dark Mode</button>
+  </div>
+</div>
   <body>
-    <h1>Form Answers Dashboard</h1>
+    <div class="container">
+      <h1>Form Answers Dashboard</h1>
 
-    <div id="answerContainer">
-      <% if (formResponses.length > 0) { %> <% if (currentIndex >= 0 &&
-      currentIndex < formResponses.length &&
-      formResponses[currentIndex].questions) { %>
-      <h2>Currently Viewing: <%= formResponses[currentIndex]._id %></h2>
-      <div class="answer">
-        <% formResponses[currentIndex].questions.forEach(question => { %>
-        <p><strong>Question ID:</strong> <%= question.id %></p>
-        <p><strong>Answer:</strong> <%= question.value %></p>
-        <hr />
-        <% }); %>
+      <div id="answerContainer">
+        <% if (formResponses.length > 0) { %> <% if (currentIndex >= 0 &&
+        currentIndex < formResponses.length &&
+        formResponses[currentIndex].questions) { %>
+        <h2>Currently Viewing: <%= formResponses[currentIndex]._id %></h2>
+        <div class="answer">
+          <% formResponses[currentIndex].questions.forEach(question => { %>
+          <p><strong>Question ID:</strong> <%= question.id %></p>
+          <p><strong>Answer:</strong> <%= question.value %></p>
+          <hr />
+          <% }); %>
+        </div>
+        <% } else { %>
+        <p>No form answers available for the selected index.</p>
+        <% } %>
+        <!-- Navigation controls -->
+        <div>
+          <input
+            type="number"
+            id="responseIndex"
+            min="0"
+            max="<%= formResponses.length - 1 %>"
+            placeholder="Enter response index"
+          />
+          <button onclick="changeResponse()">View Response</button>
+        </div>
+        <% } else { %>
+        <p>No form answers available.</p>
+        <% } %>
       </div>
-      <% } else { %>
-      <p>No form answers available for the selected index.</p>
-      <% } %>
-      <!-- Navigation controls -->
-      <div>
-        <input
-          type="number"
-          id="responseIndex"
-          min="0"
-          max="<%= formResponses.length - 1 %>"
-          placeholder="Enter response index"
-        />
-        <button onclick="changeResponse()">View Response</button>
-      </div>
-      <% } else { %>
-      <p>No form answers available.</p>
-      <% } %>
-    </div>
 
+
+      <script>
+        // Check if dark mode preference is stored in local storage
+        const isDarkMode = localStorage.getItem("darkMode") === "true";
+      
+        // Set initial dark mode state based on the stored preference
+        if (isDarkMode) {
+          document.body.classList.add("dark-mode");
+        }
+      
+        const themeToggle = document.getElementById("theme-toggle");
+      
+        themeToggle.addEventListener("click", () => {
+          // Toggle dark mode class on the body element
+          document.body.classList.toggle("dark-mode");
+      
+          // Store the dark mode preference in local storage
+          const isDarkMode = document.body.classList.contains("dark-mode");
+          localStorage.setItem("darkMode", isDarkMode.toString());
+        });
+      </script>
+      
     <script>
       function changeResponse() {
         const index = document.getElementById("responseIndex").value;
