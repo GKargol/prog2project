@@ -1,9 +1,11 @@
+/* Main CSS styles */
+
 body {
-  background-color: #f0f0f0; /* Light gray background */
   font-family: Arial, sans-serif;
   margin: 0;
   padding: 0;
-  color: #333; /* Dark gray text color */
+  color: #333; /* Default text color */
+  background-color: #f0f0f0; /* Default background color */
 }
 
 .container {
@@ -14,44 +16,8 @@ body {
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 }
 
-.dashboard-button-container {
-  position: fixed;
-  top: 20px;
-  right: 20px;
-}
-
-.dashboard-button {
-  background-color: #0078d4;
-  color: #fff;
-  padding: 10px 20px;
-  border-radius: 4px;
-  text-decoration: none;
-  font-size: 16px;
-}
-
-.dashboard-button:hover {
-  background-color: #005a9e;
-}
-
-.btn-back {
-  position: fixed;
-  top: 20px;
-  right: 20px;
-  padding: 10px 20px;
-  background-color: #007bff; /* Blue color */
-  color: #fff; /* White text color */
-  border: none;
-  border-radius: 4px;
-  text-decoration: none;
-}
-
-.btn-back:hover {
-  background-color: #0056b3; /* Darker blue on hover */
-}
-
 h1 {
   text-align: center;
-  margin-bottom: 20px; /* Add spacing below heading */
 }
 
 form {
@@ -61,24 +27,24 @@ form {
 .question-container {
   background-color: #fff; /* White background for individual question containers */
   margin-bottom: 20px;
-  padding: 15px; /* Increase padding for better spacing */
+  padding: 10px; /* Add padding to separate question containers */
   border: 1px solid #ccc; /* Light gray border */
   border-radius: 4px;
 }
 
 label {
   display: block;
-  margin-bottom: 10px; /* Adjust margin for better spacing */
-  font-size: 16px; /* Decrease font size for better hierarchy */
+  margin-bottom: 6px;
+  font-size: 18px;
 }
 
 input[type="text"] {
-  width: 100%; /* Adjust the width as needed */
+  width: 96%; /* Adjust the width to fill the container */
   padding: 10px;
   margin: 4px 0;
   border: 1px solid #ccc;
   border-radius: 4px;
-  font-size: 14px; /* Decrease font size for better readability */
+  font-size: 16px;
 }
 
 .error-message {
@@ -93,16 +59,67 @@ button {
   color: #fff; /* White text color */
   border: none;
   border-radius: 4px;
-  padding: 12px 24px; /* Increase padding for better clickability */
+  padding: 10px 20px;
   font-size: 16px;
   cursor: pointer;
-  display: inline-block; /* Change display to inline-block */
-  margin-right: 10px; /* Add margin between buttons */
-  transition: background-color 0.3s; /* Add transition for hover effect */
 }
 
 button:hover {
   background-color: #005a9e; /* Darker blue on hover */
+}
+
+/* Container for buttons */
+.button-container {
+  display: flex;
+  justify-content: flex-end; /* Align buttons to the right */
+  margin-top: 10px; /* Adjust as needed */
+}
+
+/* Dashboard button */
+.button-container a {
+  text-decoration: none; /* Remove underline from the link */
+  padding: 8px 16px; /* Add padding to the button */
+  border: 1px solid #2c3e50; /* Add border */
+  border-radius: 5px; /* Add border radius */
+  background-color: #34495e; /* Dark blue background color */
+  color: #fff; /* White text color */
+}
+
+/* Dark mode toggle button */
+.button-container button#theme-toggle {
+  padding: 8px 16px; /* Add padding to the button */
+  border: none; /* Remove border */
+  border-radius: 5px; /* Add border radius */
+  background-color: #333; /* Dark background color */
+  color: #fff; /* White text color */
+  cursor: pointer; /* Add cursor pointer */
+  margin-left: 10px; /* Adjust margin between buttons */
+}
+
+/* Additional styles for the dashboard page */
+#answerContainer {
+  background-color: #fff; /* White background for answer container */
+  margin: 20px auto; /* Center the container */
+  padding: 20px; /* Add padding */
+  max-width: 800px; /* Increase maximum width for better readability */
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Add shadow */
+}
+
+.answer {
+  margin-top: 20px; /* Add margin between answers */
+}
+
+.answer p {
+  margin-bottom: 10px; /* Add margin below each answer paragraph */
+}
+
+input[type="number"] {
+  width: 100px; /* Adjust the width for number inputs */
+  padding: 8px; /* Add padding */
+  margin-right: 10px; /* Add margin between input and button */
+  border: 1px solid #ccc; /* Light gray border */
+  border-radius: 4px; /* Add border radius */
+  font-size: 16px; /* Font size */
 }
 
 @media (max-width: 768px) {
@@ -110,4 +127,39 @@ button:hover {
   .container {
     max-width: 90%;
   }
+}
+
+/* Dark mode styles */
+.dark-mode {
+  background-color: #333; /* Dark background color */
+  color: #fff; /* Light text color */
+}
+
+.dark-mode .container,
+.dark-mode #answerContainer {
+  background-color: #444; /* Darker background color */
+}
+
+.dark-mode .question-container {
+  background-color: #555; /* Darker background color for question containers */
+  border-color: #777; /* Darker border color */
+}
+
+.dark-mode label {
+  color: #fff; /* Light text color for labels */
+}
+
+.dark-mode input[type="text"],
+.dark-mode input[type="number"] {
+  background-color: #666; /* Darker background color for text inputs */
+  color: #fff; /* Light text color for text inputs */
+  border-color: #777; /* Darker border color for text inputs */
+}
+
+.dark-mode .error-message {
+  color: #ffaaaa; /* Light text color for error messages */
+}
+
+.dark-mode button {
+  background-color: #005a9e; /* Dark blue button background */
 }
