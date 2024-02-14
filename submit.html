@@ -6,6 +6,7 @@
     <title>Submission Successful</title>
     <link rel="stylesheet" href="style.css" />
   </head>
+
   <body>
     <div class="container">
       <h1>Submission Successful</h1>
@@ -19,6 +20,22 @@
     <script>
       function returnToMainPage() {
         window.location.href = "/"; // Redirect back to the main page
+      }
+
+      // Dark mode toggle script
+      const themeToggle = document.getElementById("theme-toggle");
+
+      themeToggle.addEventListener("click", () => {
+        document.body.classList.toggle("dark-mode");
+        // Store the dark mode preference in local storage
+        const isDarkMode = document.body.classList.contains("dark-mode");
+        localStorage.setItem("darkMode", isDarkMode.toString());
+      });
+
+      // Set initial dark mode state based on the stored preference
+      const isDarkMode = localStorage.getItem("darkMode") === "true";
+      if (isDarkMode) {
+        document.body.classList.add("dark-mode");
       }
     </script>
   </body>
