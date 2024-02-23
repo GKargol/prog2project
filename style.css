@@ -1,11 +1,10 @@
 /* Main CSS styles */
-
 body {
   font-family: Arial, sans-serif;
   margin: 0;
   padding: 0;
   color: #333; /* Default text color */
-  background-color: #076652; /* Default background color: Agusta National Green */
+  background-color: #076652; /* Default background color */
 }
 
 .container {
@@ -30,6 +29,7 @@ form {
   padding: 10px; /* Add padding to separate question containers */
   border: 1px solid #ccc; /* Light gray border */
   border-radius: 4px;
+  position: relative;
 }
 
 label {
@@ -52,6 +52,40 @@ input[type="text"] {
   font-size: 14px;
   display: block;
   margin-top: 4px;
+}
+
+.input-info-container {
+  display: flex;
+  align-items: center; /* Align items vertically */
+}
+
+.input-info-container input {
+  flex: 1; /* Take remaining space */
+}
+
+.info-icon {
+  margin-left: 10px; /* Adjust as needed */
+  cursor: pointer; /* Change cursor to pointer */
+}
+
+/* Adjust the tooltip styling */
+
+.tooltip {
+  position: absolute;
+  top: 50%; /* Center vertically */
+  left: calc(100% + 5px); /* Adjusted position to the right of the info icon */
+  transform: translateY(-50%); /* Center vertically */
+  background-color: #333; /* Dark background color */
+  color: #fff; /* White text color */
+  padding: 5px; /* Add padding */
+  border-radius: 4px; /* Add border radius */
+  font-size: 14px; /* Font size */
+  display: none; /* Hide by default */
+  width: auto; /* Make the width dynamic */
+}
+
+.info-icon:hover + .tooltip {
+  display: block; /* Show on hover */
 }
 
 button {
