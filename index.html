@@ -13,6 +13,7 @@
       <button id="theme-toggle">Toggle Dark Mode</button>
     </div>
 
+    <div id="tooltip-container"></div>
     <div class="container">
       <h1>Performance Report House53</h1>
       <div id="section1" class="form-section">
@@ -20,66 +21,90 @@
         <form>
           <!-- Question 1 -->
           <div class="question-container">
-            <label for="question1">Name:</label>
-            <input
-              type="text"
-              id="question1"
-              name="question1"
-              placeholder="Your answer"
-              required
-            />
+            <label for="question1">Name: </label>
+            <div class="input-info-container">
+              <input
+                type="text"
+                id="question1"
+                name="question1"
+                placeholder="Your answer"
+                required
+              />
+              <span class="info-icon" title="Enter your full name"
+                >&#9432;</span
+              >
+              <div class="tooltip">Enter your full name</div>
+            </div>
             <span class="error-message" id="question1Error"></span>
           </div>
 
           <!-- Question 2 -->
           <div class="question-container">
             <label for="question2">Address:</label>
-            <input
-              type="text"
-              id="question2"
-              name="question2"
-              placeholder="Your answer"
-              required
-            />
+            <div class="input-info-container">
+              <input
+                type="text"
+                id="question2"
+                name="question2"
+                placeholder="Your answer"
+                required
+              />
+              <span class="info-icon" title="Enter your address">&#9432;</span>
+              <div class="tooltip">Enter your address</div>
+            </div>
             <span class="error-message" id="question2Error"></span>
           </div>
 
           <!-- Question 3 -->
           <div class="question-container">
             <label for="question3">Age:</label>
-            <input
-              type="text"
-              id="question3"
-              name="question3"
-              placeholder="Your answer"
-              required
-            />
+            <div class="input-info-container">
+              <input
+                type="text"
+                id="question3"
+                name="question3"
+                placeholder="Your answer"
+                required
+              />
+              <span class="info-icon" title="Enter your age">&#9432;</span>
+              <div class="tooltip">Enter your age</div>
+            </div>
             <span class="error-message" id="question3Error"></span>
           </div>
 
           <!-- Question 4 -->
           <div class="question-container">
             <label for="question4">DOB:</label>
-            <input
-              type="text"
-              id="question4"
-              name="question4"
-              placeholder="Your answer"
-              required
-            />
+            <div class="input-info-container">
+              <input
+                type="text"
+                id="question4"
+                name="question4"
+                placeholder="Your answer"
+                required
+              />
+              <span class="info-icon" title="Enter your date of birth"
+                >&#9432;</span
+              >
+              <div class="tooltip">Enter your date of birth</div>
+            </div>
             <span class="error-message" id="question4Error"></span>
           </div>
 
           <!-- Question 5 -->
           <div class="question-container">
             <label for="question5">Sex:</label>
-            <input
-              type="text"
-              id="question5"
-              name="question5"
-              placeholder="Your answer"
-              required
-            />
+            <div class="input-info-container">
+              <input
+                type="text"
+                id="question5"
+                name="question5"
+                placeholder="Your answer"
+                required
+              />
+              <span class="info-icon" title="Enter your gender">&#9432;</span>
+              <div class="tooltip">Enter your gender</div>
+            </div>
             <span class="error-message" id="question5Error"></span>
           </div>
 
