@@ -20,5 +20,6 @@ Can make this easy with `npm install`
 
 ## Todo List
 
+- Finishing sections of Performance Report
 - Formatting and finalize dashboard
 - Other formatting and cleaning comments
