@@ -4,7 +4,7 @@ body {
   margin: 0;
   padding: 0;
   color: #333; /* Default text color */
-  background-color: #076652; /* Default background color */
+  background-color: #160053; /* Default background color */
 }
 
 .container {
@@ -89,7 +89,7 @@ input[type="text"] {
 }
 
 button {
-  background-color: #0078d4; /* Light blue button background */
+  background-color: #CD7F32; /* Light blue button background */
   color: #fff; /* White text color */
   border: none;
   border-radius: 4px;
