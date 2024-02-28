@@ -197,3 +197,7 @@ input[type="number"] {
 .dark-mode button {
   background-color: #005a9e; /* Dark blue button background */
 }
+
+.dark-mode button:hover {
+  background-color:#CD7F32
+}
