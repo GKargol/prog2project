@@ -1,79 +1,145 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Dashboard</title>
-    <link rel="stylesheet" href="style.css" />
-  </head>
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Dashboard</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
   <div class="button-container">
     <a href="/" class="btn-back">Back to Form</a>
     <button id="theme-toggle">Toggle Dark Mode</button>
   </div>
-</div>
-  <body>
-    <div class="container">
-      <h1>Form Answers Dashboard</h1>
 
-      <div id="answerContainer">
-        <% if (formResponses.length > 0) { %> <% if (currentIndex >= 0 &&
-        currentIndex < formResponses.length &&
-        formResponses[currentIndex].questions) { %>
-        <h2>Currently Viewing: <%= formResponses[currentIndex]._id %></h2>
-        <div class="answer">
-          <% formResponses[currentIndex].questions.forEach(question => { %>
+  <div class="container">
+    <h1>Dashboard</h1>
+
+    <!-- Tab buttons -->
+    <div class="tab">
+      <button class="tablinks" onclick="openTab(event, 'formdatas')">Form Data</button>
+      <button class="tablinks" onclick="openTab(event, 'statsheet')">Statsheet</button>
+    </div>
+
+    <!-- Form Data tab -->
+    <div id="formdatas" class="tabcontent" <% if (tab !== 'formdatas') { %> style="display: none;" <% } %>>
+      <h2>Form Data</h2>
+      <ul>
+        <% formData.forEach(form => { %>
+          <li>
+            <strong>Form ID:</strong> <%= form._id %><br>
+            <% form.questions.forEach(question => { %>
+              <p><strong>Question ID:</strong> <%= question.id %></p>
+              <p><strong>Answer:</strong> <%= question.value %></p>
+            <% }); %>
+          </li>
+        <% }); %>
+      </ul>
+
+     <!-- Next form input field -->
+    <div>
+      <label for="nextForm">Next Form Index:</label>
+      <input type="number" id="nextForm" name="nextForm" min="1" max="<%= totalStatsCount %>" value="<%= currentIndex + 1 %>">
+      <button onclick="viewNextForm()">View Next Form</button>
+    </div>
+
+<script>
+  // JavaScript function to handle viewing next form
+  function viewNextForm() {
+    let nextFormIndex = parseInt(document.getElementById("nextForm").value);
+    if (nextFormIndex === 0) {
+      nextFormIndex = 0; // Allow 0 index
+    } else {
+      nextFormIndex--; // Adjust to account for 1-based index
+    }
+    console.log("Next Form Index:", nextFormIndex); // Log the next form index
+    // Redirect to the dashboard page with the selected index as a query parameter and tab as formdatas
+    window.location.href = `/dashboard?currentIndex=${nextFormIndex}&tab=formdatas`;
+  }
+</script>
+
+
+    </div>
+
+   <!-- Statsheet tab -->
+<div id="statsheet" class="tabcontent" <% if (tab !== 'statsheet') { %> style="display: none;" <% } %>>
+  <h2>Statsheet Data</h2>
+  <ul>
+    <% statsData.forEach(entry => { %>
+      <li>
+        <strong>Entry ID:</strong> <%= entry._id %><br>
+        <% entry.questions.forEach(question => { %>
           <p><strong>Question ID:</strong> <%= question.id %></p>
           <p><strong>Answer:</strong> <%= question.value %></p>
-          <hr />
-          <% }); %>
-        </div>
-        <% } else { %>
-        <p>No form answers available for the selected index.</p>
-        <% } %>
-        <!-- Navigation controls -->
-        <div>
-          <input
-            type="number"
-            id="responseIndex"
-            min="0"
-            max="<%= formResponses.length - 1 %>"
-            placeholder="Enter response index"
-          />
-          <button onclick="changeResponse()">View Response</button>
-        </div>
-        <% } else { %>
-        <p>No form answers available.</p>
-        <% } %>
-      </div>
+        <% }); %>
+      </li>
+    <% }); %>
+  </ul>
+
+  <!-- Next entry input field -->
+<div>
+  <label for="nextEntry">Next Entry Index:</label>
+  <input type="number" id="nextEntry" name="nextEntry" min="1" max="<%= totalStatsCount %>" value="<%= currentIndex + 1 %>">
+  <button onclick="viewNextEntry()">View Next Entry</button>
+</div>
+
+<script>
+  // JavaScript function to handle viewing next entry
+  function viewNextEntry() {
+    let nextEntryIndex = parseInt(document.getElementById("nextEntry").value);
+    if (nextEntryIndex === 0) {
+      nextEntryIndex = 0; // Allow 0 index
+    } else {
+      nextEntryIndex--; // Adjust to account for 1-based index
+    }
+    console.log("Next Entry Index:", nextEntryIndex); // Log the next entry index
+    // Redirect to the dashboard page with the selected index as a query parameter and tab as statsheet
+    window.location.href = `/dashboard?currentIndex=${nextEntryIndex}&tab=statsheet`;
+  }
+</script>
 
 
-      <script>
-        // Check if dark mode preference is stored in local storage
-        const isDarkMode = localStorage.getItem("darkMode") === "true";
-      
-        // Set initial dark mode state based on the stored preference
-        if (isDarkMode) {
-          document.body.classList.add("dark-mode");
-        }
-      
-        const themeToggle = document.getElementById("theme-toggle");
-      
-        themeToggle.addEventListener("click", () => {
-          // Toggle dark mode class on the body element
-          document.body.classList.toggle("dark-mode");
-      
-          // Store the dark mode preference in local storage
-          const isDarkMode = document.body.classList.contains("dark-mode");
-          localStorage.setItem("darkMode", isDarkMode.toString());
-        });
-      </script>
-      
-    <script>
-      function changeResponse() {
-        const index = document.getElementById("responseIndex").value;
-        // Redirect to the dashboard page with the selected index as a query parameter
-        window.location.href = `/dashboard?currentIndex=${index}`;
+</div>
+
+
+  </div>
+
+  <script>
+    // JavaScript function to open the selected tab
+    function openTab(evt, tabName) {
+      var i, tabcontent, tablinks;
+      tabcontent = document.getElementsByClassName("tabcontent");
+      for (i = 0; i < tabcontent.length; i++) {
+        tabcontent[i].style.display = "none";
       }
-    </script>
-  </body>
+      tablinks = document.getElementsByClassName("tablinks");
+      for (i = 0; i < tablinks.length; i++) {
+        tablinks[i].className = tablinks[i].className.replace(" active", "");
+      }
+      document.getElementById(tabName).style.display = "block";
+      evt.currentTarget.className += " active";
+    }
+  </script>
+
+  <script>
+    // Check if dark mode preference is stored in local storage
+    const isDarkMode = localStorage.getItem("darkMode") === "true";
+  
+    // Set initial dark mode state based on the stored preference
+    if (isDarkMode) {
+      document.body.classList.add("dark-mode");
+    }
+  
+    const themeToggle = document.getElementById("theme-toggle");
+  
+    themeToggle.addEventListener("click", () => {
+      // Toggle dark mode class on the body element
+      document.body.classList.toggle("dark-mode");
+  
+      // Store the dark mode preference in local storage
+      const isDarkMode = document.body.classList.contains("dark-mode");
+      localStorage.setItem("darkMode", isDarkMode.toString());
+    });
+  </script>
+</body>
 </html>
