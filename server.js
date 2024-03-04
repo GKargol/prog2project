@@ -8,7 +8,7 @@ dotenv.config();
 
 // Create an Express application
 const app = express();
-const port = 3000;
+const port = process.env.PORT || 3000; // Use the port specified in the environment variable or default to 3000
 
 // Configure middleware for handling requests and responses
 app.use(express.static(__dirname));
@@ -37,23 +37,23 @@ const connectToDatabase = async () => {
   try {
     const client = new MongoClient(uri);
     await client.connect();
-    return client.db("test").collection("formdatas");
+    return client.db(); // Return the client's database reference
   } catch (err) {
     throw new Error("Failed to connect to MongoDB");
   }
 };
 
 // Handle POST requests to the "/submit" route
-app.post("/submit", async (req, res) => {
+app.post("/submit", async (req, res, next) => {
   try {
     // Connect to MongoDB
-    const collection = await connectToDatabase();
+    const db = await connectToDatabase();
 
     // Get the submitted questions as an array
     const questions = req.body.questions;
 
     // Insert the questions array into the MongoDB collection
-    const result = await collection.insertOne({ questions });
+    const result = await db.collection("formdatas").insertOne({ questions });
 
     // Respond with a JSON success message and the MongoDB result
     res.json({ message: "Data submitted to MongoDB successfully", result });
@@ -63,30 +63,40 @@ app.post("/submit", async (req, res) => {
   }
 });
 
-// Handle GET requests to the "/dashboard" route
-app.get("/dashboard", async (req, res, next) => {
+// Define route to render your dashboard template
+app.get('/dashboard', async (req, res, next) => {
   try {
     // Connect to MongoDB
-    const collection = await connectToDatabase();
+    const db = await connectToDatabase();
 
-    // Fetch all documents from the collection
-    const formResponses = await collection.find({}).toArray();
+    // Fetch total number of forms in the "formdatas" collection
+    const totalFormsCount = await db.collection('formdatas').countDocuments();
 
-    // Get the currentIndex from the query string, default to 0 if not provided
-    const currentIndex = req.query.currentIndex
-      ? parseInt(req.query.currentIndex)
-      : 0;
+    // Fetch total number of documents in the "statsheet" collection
+    const totalStatsCount = await db.collection('statsheet').countDocuments();
 
-    // Render the dashboard page with the fetched data and currentIndex
-    res.render("dashboard.ejs", {
-      formResponses: formResponses,
-      currentIndex: currentIndex,
-    });
+    // Get the current index from the query parameters
+    const currentIndex = parseInt(req.query.currentIndex) || 0;
+
+    // Fetch data for the form at the specified index from "formdatas" collection
+    const formData = await db.collection('formdatas').findOne({}, { skip: currentIndex });
+
+    // Fetch data for the document at the specified index from "statsheet" collection
+    const statsData = await db.collection('statsheet').findOne({}, { skip: currentIndex });
+
+    // Determine the active tab based on the query parameter
+    const tab = req.query.tab || 'formdatas';
+
+    // Render your HTML template with the fetched data, total counts, current index, and tab information
+    res.render('dashboard', { formData: formData ? [formData] : [], statsData: statsData ? [statsData] : [], totalFormsCount, totalStatsCount, currentIndex, tab });
   } catch (err) {
     // Forward the error to the error handling middleware
     next(err);
   }
 });
+
+
+
 
 // Error handling middleware for handling database errors
 app.use(handleDatabaseError);
