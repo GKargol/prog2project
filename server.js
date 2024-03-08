@@ -63,6 +63,26 @@ app.post("/submit", async (req, res, next) => {
   }
 });
 
+// Handle POST requests to the "/submit2" route
+app.post("/submit2", async (req, res, next) => {
+  try {
+    // Connect to MongoDB
+    const db = await connectToDatabase();
+
+    // Get the submitted questions as an array
+    const questions = req.body.questions;
+
+    // Insert the questions array into the MongoDB collection
+    const result = await db.collection("statsheet").insertOne({ questions });
+
+    // Respond with a JSON success message and the MongoDB result
+    res.json({ message: "Data submitted to MongoDB successfully", result });
+  } catch (err) {
+    // Forward the error to the error handling middleware
+    next(err);
+  }
+});
+
 // Define route to render your dashboard template
 app.get('/dashboard', async (req, res, next) => {
   try {
