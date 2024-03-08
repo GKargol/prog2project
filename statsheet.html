@@ -1,0 +1,341 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Stat Sheet Report</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <!-- Add a container for the dashboard button -->
+    <div class="button-container">
+      <a href="/dashboard">Dashboard</a>
+      <a href="/index.html">Performance Form</a>
+      <button id="theme-toggle">Toggle Dark Mode</button>
+    </div>
+
+    <div id="tooltip-container"></div>
+    <div class="container">
+      <h1>Stat Sheet Form House53</h1>
+      <div id="section1" class="form-section">
+        <h2>Section 1: Background</h2>
+        <form>
+          <!-- Question 1 -->
+          <div class="question-container">
+            <label for="question1">Placeholder: </label>
+            <div class="input-info-container">
+              <input
+                type="text"
+                id="question1"
+                name="question1"
+                placeholder="Your answer"
+                required
+              />
+              <span class="info-icon" title="Placeholder"
+                >&#9432;</span
+              >
+              <div class="tooltip">Placeholder</div>
+            </div>
+            <span class="error-message" id="question1Error"></span>
+          </div>
+
+          <!-- Question 2 -->
+          <div class="question-container">
+            <label for="question2">Placeholder:</label>
+            <div class="input-info-container">
+              <input
+                type="text"
+                id="question2"
+                name="question2"
+                placeholder="Your answer"
+                required
+              />
+              <span class="info-icon" title="Placeholder">&#9432;</span>
+              <div class="tooltip">Placeholder</div>
+            </div>
+            <span class="error-message" id="question2Error"></span>
+          </div>
+
+          <!-- Question 3 -->
+          <div class="question-container">
+            <label for="question3">Placeholder:</label>
+            <div class="input-info-container">
+              <input
+                type="text"
+                id="question3"
+                name="question3"
+                placeholder="Your answer"
+                required
+              />
+              <span class="info-icon" title="Placeholder">&#9432;</span>
+              <div class="tooltip">Placeholder</div>
+            </div>
+            <span class="error-message" id="question3Error"></span>
+          </div>
+
+          <!-- Question 4 -->
+          <div class="question-container">
+            <label for="question4">Placeholder:</label>
+            <div class="input-info-container">
+              <input
+                type="text"
+                id="question4"
+                name="question4"
+                placeholder="Your answer"
+                required
+              />
+              <span class="info-icon" title="Placeholder"
+                >&#9432;</span
+              >
+              <div class="tooltip">Placeholder</div>
+            </div>
+            <span class="error-message" id="question4Error"></span>
+          </div>
+
+          <!-- Question 5 -->
+          <div class="question-container">
+            <label for="question5">Placeholder:</label>
+            <div class="input-info-container">
+              <input
+                type="text"
+                id="question5"
+                name="question5"
+                placeholder="Your answer"
+                required
+              />
+              <span class="info-icon" title="Placeholder">&#9432;</span>
+              <div class="tooltip">Placeholder</div>
+            </div>
+            <span class="error-message" id="question5Error"></span>
+          </div>
+
+          <!-- Question 6 -->
+          <div class="question-container">
+            <label for="question6">Placeholder:</label>
+            <input
+              type="text"
+              id="question6"
+              name="question6"
+              placeholder="Your answer"
+              required
+            />
+            <span class="error-message" id="question6Error"></span>
+          </div>
+
+          <!-- Question 7 -->
+          <div class="question-container">
+            <label for="question7">Placeholder:</label>
+            <input
+              type="text"
+              id="question7"
+              name="question7"
+              placeholder="Your answer"
+              required
+            />
+            <span class="error-message" id="question7Error"></span>
+          </div>
+
+          <!-- Question 8 -->
+          <div class="question-container">
+            <label for="question8">Placeholder:</label>
+            <input
+              type="text"
+              id="question8"
+              name="question8"
+              placeholder="Your answer"
+              required
+            />
+            <span class="error-message" id="question8Error"></span>
+          </div>
+
+          <!-- Question 9 -->
+          <div class="question-container">
+            <label for="question9">Placeholder:</label>
+            <input
+              type="text"
+              id="question9"
+              name="question9"
+              placeholder="Your answer"
+              required
+            />
+            <span class="error-message" id="question9Error"></span>
+          </div>
+
+          <!-- Question 10 -->
+          <div class="question-container">
+            <label for="question10">Placeholder:</label>
+            <input
+              type="text"
+              id="question10"
+              name="question10"
+              placeholder="Your answer"
+              required
+            />
+            <span class="error-message" id="question10Error"></span>
+          </div>
+
+          <!-- Question 11 -->
+          <div class="question-container">
+            <label for="question11">Placeholder:</label>
+            <input
+              type="text"
+              id="question11"
+              name="question11"
+              placeholder="Your answer"
+              required
+            />
+            <span class="error-message" id="question11Error"></span>
+          </div>
+
+          <!-- Question 12 -->
+          <div class="question-container">
+            <label for="question12"
+              >Placeholder:</label
+            >
+            <input
+              type="text"
+              id="question12"
+              name="question12"
+              placeholder="Your answer"
+              required
+            />
+            <span class="error-message" id="question5Error"></span>
+          </div>
+
+          <!-- Question 13 -->
+          <div class="question-container">
+            <label for="question13">Placeholder:</label>
+            <input
+              type="text"
+              id="question13"
+              name="question13"
+              placeholder="Your answer"
+              required
+            />
+            <span class="error-message" id="question13Error"></span>
+          </div>
+
+          <button type="button" onclick="showSection('section2')">Next</button>
+        </form>
+      </div>
+
+      <div id="section2" class="form-section" style="display: none">
+        <h2>Section 2: Additional Questions</h2>
+        <form>
+          
+
+          <button type="button" onclick="showSection('section1')">
+            Previous
+          </button>
+          <button type="button" onclick="showSection('section3')">Next</button>
+        </form>
+      </div>
+
+      <div id="section3" class="form-section" style="display: none">
+        <h2>Section 3: Final Questions</h2>
+        <form>
+          <!-- Add more questions for section 3 if needed -->
+
+          <button type="button" onclick="showSection('section2')">
+            Previous
+          </button>
+          <button type="button" onclick="submitForm()">Submit</button>
+        </form>
+      </div>
+    </div>
+
+    <script>
+      function showSection(sectionId) {
+        const sections = document.querySelectorAll(".form-section");
+        sections.forEach((section) => {
+          if (section.id === sectionId) {
+            section.style.display = "block";
+          } else {
+            section.style.display = "none";
+          }
+        });
+      }
+
+      async function submitForm() {
+        let hasError = false;
+
+        // Reset error messages
+        const errorMessages = document.querySelectorAll(".error-message");
+        errorMessages.forEach((errorMessage) => {
+          errorMessage.textContent = "";
+        });
+
+        // Validate form inputs
+        const formSections = document.querySelectorAll(".form-section");
+        formSections.forEach((section) => {
+          const inputElements = section.querySelectorAll("input[type='text']");
+          inputElements.forEach((input) => {
+            const questionValue = input.value.trim();
+            const errorElement = document.getElementById(`${input.id}Error`);
+            if (questionValue === "") {
+              errorElement.textContent = "Please fill out this field";
+              hasError = true;
+            }
+          });
+        });
+
+        if (!hasError) {
+          const formData = [];
+          formSections.forEach((section) => {
+            const inputElements =
+              section.querySelectorAll("input[type='text']");
+            inputElements.forEach((input) => {
+              const questionId = input.id;
+              const questionValue = input.value.trim();
+              formData.push({ id: questionId, value: questionValue });
+            });
+          });
+
+          try {
+            const response = await fetch("/submit2", {
+              method: "POST",
+              body: JSON.stringify({ questions: formData }),
+              headers: {
+                "Content-Type": "application/json",
+              },
+            });
+
+            if (response.ok) {
+              formSections.forEach((section) => {
+                section.querySelector("form").reset();
+              });
+              window.location.href = "/submit.html"; // Redirect to submit.html upon successful submission
+            } else {
+              alert("Failed to submit data to MongoDB");
+            }
+          } catch (error) {
+            console.error(error);
+            alert("An error occurred while submitting the form.");
+          }
+        } else {
+          alert("Please fill out all required fields.");
+        }
+      }
+    </script>
+    <script>
+      // Check if dark mode preference is stored in local storage
+      const isDarkMode = localStorage.getItem("darkMode") === "true";
+
+      // Set initial dark mode state based on the stored preference
+      if (isDarkMode) {
+        document.body.classList.add("dark-mode");
+      }
+
+      const themeToggle = document.getElementById("theme-toggle");
+
+      themeToggle.addEventListener("click", () => {
+        // Toggle dark mode class on the body element
+        document.body.classList.toggle("dark-mode");
+
+        // Store the dark mode preference in local storage
+        const isDarkMode = document.body.classList.contains("dark-mode");
+        localStorage.setItem("darkMode", isDarkMode.toString());
+      });
+    </script>
+  </body>
+</html>
