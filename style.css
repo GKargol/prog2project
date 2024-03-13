@@ -89,7 +89,7 @@ input[type="text"] {
 }
 
 button {
-  background-color: #CD7F32; /* Light blue button background */
+  background-color: #cd7f32; /* Light blue button background */
   color: #fff; /* White text color */
   border: none;
   border-radius: 4px;
@@ -117,6 +117,8 @@ button:hover {
   border-radius: 5px; /* Add border radius */
   background-color: #34495e; /* Dark blue background color */
   color: #fff; /* White text color */
+  margin-left: 5px;
+  margin-right: 5px;
 }
 
 /* Dark mode toggle button */
@@ -199,5 +201,55 @@ input[type="number"] {
 }
 
 .dark-mode button:hover {
-  background-color:#CD7F32
+  background-color: #cd7f32;
+}
+
+/* Login page styles */
+.login-container {
+  background-color: #fff;
+  padding: 20px;
+  border-radius: 5px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  width: 300px;
+  margin: 100px auto;
+}
+
+h2 {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.form-group {
+  margin-bottom: 20px;
+}
+
+.login-container label {
+  display: block;
+  margin-bottom: 6px;
+  font-size: 18px;
+}
+
+.login-container input[type="text"],
+.login-container input[type="password"] {
+  width: calc(100% - 20px);
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  font-size: 16px;
+  margin-bottom: 10px;
+}
+
+.login-container button {
+  background-color: #cd7f32;
+  color: #fff;
+  border: none;
+  border-radius: 4px;
+  padding: 10px 20px;
+  font-size: 16px;
+  cursor: pointer;
+  width: calc(100% - 20px);
+}
+
+.login-container button:hover {
+  background-color: #005a9e;
 }
