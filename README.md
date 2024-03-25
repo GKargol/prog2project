@@ -12,6 +12,9 @@ Base Target: shaweliteinstruction.com
 - In terminal, make sure you have NodeJS and NPM installed
 - Use `npm i` to install all dependencies. Then run `npm i dotenv ejs` to download all needed dependencies.
 - To start testing, use `node server.js` to open a local port via express. "Go Live" plugin will not work due to listing on a different port.
+-Mongo DB is being used to cure our dependencies
+-SQL bad
+-Using color pallete from client's House 53 business (Bronze, Navy, White)
 
 ## Current Dependencies 
 Can make this easy with `npm install`
@@ -34,3 +37,4 @@ Can make this easy with `npm install`
 - Accessibility features
 - Statsheet table view for dashboard
 - Statsheet form pages
+  
