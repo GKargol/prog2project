@@ -15,61 +15,22 @@
 
   <div class="container">
     <h1>Dashboard</h1>
-
+  
     <!-- Tab buttons -->
     <div class="tab">
       <button class="tablinks" onclick="openTab(event, 'formdatas')">Form Data</button>
       <button class="tablinks" onclick="openTab(event, 'statsheet')">Statsheet</button>
     </div>
-
-    <!-- Form Data tab -->
-    <div id="formdatas" class="tabcontent" <% if (tab !== 'formdatas') { %> style="display: none;" <% } %>>
-      <h2>Form Data</h2>
-      <ul>
-        <% formData.forEach(form => { %>
-          <li>
-            <strong>Form ID:</strong> <%= form._id %><br>
-            <% form.questions.forEach(question => { %>
-              <p><strong>Question ID:</strong> <%= question.id %></p>
-              <p><strong>Answer:</strong> <%= question.value %></p>
-            <% }); %>
-          </li>
-        <% }); %>
-      </ul>
-
-     <!-- Next form input field -->
-    <div>
-      <label for="nextForm">Next Form Index:</label>
-      <input type="number" id="nextForm" name="nextForm" min="1" max="<%= totalFormsCount %>" value="<%= currentIndex + 1 %>">
-      <button onclick="viewNextForm()">View Next Form</button>
-    </div>
-
-<script>
-  // JavaScript function to handle viewing next form
-  function viewNextForm() {
-    let nextFormIndex = parseInt(document.getElementById("nextForm").value);
-    if (nextFormIndex === 0) {
-      nextFormIndex = 0; // Allow 0 index
-    } else {
-      nextFormIndex--; // Adjust to account for 1-based index
-    }
-    console.log("Next Form Index:", nextFormIndex); // Log the next form index
-    // Redirect to the dashboard page with the selected index as a query parameter and tab as formdatas
-    window.location.href = `/dashboard?currentIndex=${nextFormIndex}&tab=formdatas`;
-  }
-</script>
-
-
-    </div>
-
-   <!-- Statsheet tab -->
-<div id="statsheet" class="tabcontent" <% if (tab !== 'statsheet') { %> style="display: none;" <% } %>>
-  <h2>Statsheet Data</h2>
+  
+   <!-- Form Data tab -->
+<div id="formdatas" class="tabcontent" <% if (tab !== 'formdatas') { %> style="display: none;" <% } %>>
+  <% const currentFormIndex = currentIndex + 1; %>
+  <h2>Form <%= currentFormIndex %>/<%= totalFormsCount %></h2>
   <ul>
-    <% statsData.forEach(entry => { %>
+    <% formData.forEach(form => { %>
       <li>
-        <strong>Entry ID:</strong> <%= entry._id %><br>
-        <% entry.questions.forEach(question => { %>
+        <strong>Form ID:</strong> <%= form._id %><br>
+        <% form.questions.forEach(question => { %>
           <p><strong>Question ID:</strong> <%= question.id %></p>
           <p><strong>Answer:</strong> <%= question.value %></p>
         <% }); %>
@@ -77,27 +38,87 @@
     <% }); %>
   </ul>
 
-  <!-- Next entry input field -->
-<div>
-  <label for="nextEntry">Next Entry Index:</label>
-  <input type="number" id="nextEntry" name="nextEntry" min="1" max="<%= totalStatsCount %>" value="<%= currentIndex + 1 %>">
-  <button onclick="viewNextEntry()">View Next Entry</button>
+ <!-- Next form input field -->
+ <div>
+  <!-- Input field for next form index -->
+  <label for="nextForm">Next Form Index:</label>
+  <input type="number" id="nextForm" name="nextForm" min="1" max="<%= totalFormsCount %>" value="<%= currentFormIndex %>">
+  <!-- Button to view next form -->
+  <button onclick="viewNextForm()">View Next Form</button>
 </div>
 
 <script>
-  // JavaScript function to handle viewing next entry
-  function viewNextEntry() {
-    let nextEntryIndex = parseInt(document.getElementById("nextEntry").value);
-    if (nextEntryIndex === 0) {
-      nextEntryIndex = 0; // Allow 0 index
+  // JavaScript function to handle viewing next form
+  function viewNextForm() {
+    // Retrieve the value entered in the input field
+    let nextFormIndex = parseInt(document.getElementById("nextForm").value);
+    // Adjust the index to account for 1-based indexing
+    if (nextFormIndex === 0) {
+      nextFormIndex = 0; // Allow 0 index
     } else {
-      nextEntryIndex--; // Adjust to account for 1-based index
+      nextFormIndex--; // Adjust to account for 1-based index
     }
-    console.log("Next Entry Index:", nextEntryIndex); // Log the next entry index
-    // Redirect to the dashboard page with the selected index as a query parameter and tab as statsheet
-    window.location.href = `/dashboard?currentIndex=${nextEntryIndex}&tab=statsheet`;
+    // Log the adjusted index to the console
+    console.log("Next Form Index:", nextFormIndex);
+    // Redirect to the dashboard page with the selected index as a query parameter and tab set to formdatas
+    window.location.href = `/dashboard?currentIndex=${nextFormIndex}&tab=formdatas`;
   }
 </script>
+</div>
+
+  
+  
+
+   <!-- Statsheet tab -->
+   <div id="statsheet" class="tabcontent" <% if (tab !== 'statsheet') { %> style="display: none;" <% } %>>
+    <h2>Statsheet Data</h2>
+    <table>
+      <thead>
+        <tr>
+          <th>Entry ID</th>
+          <th>Question ID</th>
+          <th>Answer</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% statsData.forEach(entry => { %>
+          <% entry.questions.forEach(question => { %>
+            <tr>
+              <td><%= entry._id %></td>
+              <td><%= question.id %></td>
+              <td><%= question.value %></td>
+            </tr>
+          <% }); %>
+        <% }); %>
+      </tbody>
+    </table>
+  
+    <div>
+      <!-- Input field for next entry index -->
+      <label for="nextEntry">Next Entry Index:</label>
+      <input type="number" id="nextEntry" name="nextEntry" min="1" max="<%= totalStatsCount %>" value="<%= currentIndex + 1 %>">
+      <!-- Button to view next entry -->
+      <button onclick="viewNextEntry()">View Next Entry</button>
+    </div>
+    
+    <script>
+      // JavaScript function to handle viewing next entry
+      function viewNextEntry() {
+        // Retrieve the value entered in the input field
+        let nextEntryIndex = parseInt(document.getElementById("nextEntry").value);
+        // Adjust the index to account for 1-based indexing
+        if (nextEntryIndex === 0) {
+          nextEntryIndex = 0; // Allow 0 index
+        } else {
+          nextEntryIndex--; // Adjust to account for 1-based index
+        }
+        // Log the adjusted index to the console
+        console.log("Next Entry Index:", nextEntryIndex);
+        // Redirect to the dashboard page with the selected index as a query parameter and tab set to statsheet
+        window.location.href = `/dashboard?currentIndex=${nextEntryIndex}&tab=statsheet`;
+      }
+    </script>
+    
 
 
 </div>
