@@ -14,215 +14,65 @@
       <button id="theme-toggle">Toggle Dark Mode</button>
     </div>
 
-    <div id="tooltip-container"></div>
     <div class="container">
       <h1>Stat Sheet Form House53</h1>
+
+      <!-- Section 1: Background -->
       <div id="section1" class="form-section">
         <h2>Section 1: Background</h2>
         <form>
-          <!-- Question 1 -->
           <div class="question-container">
-            <label for="question1">Placeholder: </label>
-            <div class="input-info-container">
-              <input
-                type="text"
-                id="question1"
-                name="question1"
-                placeholder="Your answer"
-                required
-              />
-              <span class="info-icon" title="Placeholder"
-                >&#9432;</span
-              >
-              <div class="tooltip">Placeholder</div>
-            </div>
+            <label for="question1">How many hours do you sleep?</label>
+            <input
+              type="text"
+              id="question1"
+              name="question1"
+              placeholder="Enter multiple values separated by commas (e.g., 7, 8, 6)"
+              required
+            />
             <span class="error-message" id="question1Error"></span>
           </div>
-
-          <!-- Question 2 -->
           <div class="question-container">
-            <label for="question2">Placeholder:</label>
-            <div class="input-info-container">
-              <input
-                type="text"
-                id="question2"
-                name="question2"
-                placeholder="Your answer"
-                required
-              />
-              <span class="info-icon" title="Placeholder">&#9432;</span>
-              <div class="tooltip">Placeholder</div>
-            </div>
-            <span class="error-message" id="question2Error"></span>
-          </div>
-
-          <!-- Question 3 -->
-          <div class="question-container">
-            <label for="question3">Placeholder:</label>
-            <div class="input-info-container">
-              <input
-                type="text"
-                id="question3"
-                name="question3"
-                placeholder="Your answer"
-                required
-              />
-              <span class="info-icon" title="Placeholder">&#9432;</span>
-              <div class="tooltip">Placeholder</div>
-            </div>
-            <span class="error-message" id="question3Error"></span>
-          </div>
-
-          <!-- Question 4 -->
-          <div class="question-container">
-            <label for="question4">Placeholder:</label>
-            <div class="input-info-container">
-              <input
-                type="text"
-                id="question4"
-                name="question4"
-                placeholder="Your answer"
-                required
-              />
-              <span class="info-icon" title="Placeholder"
-                >&#9432;</span
-              >
-              <div class="tooltip">Placeholder</div>
-            </div>
-            <span class="error-message" id="question4Error"></span>
-          </div>
-
-          <!-- Question 5 -->
-          <div class="question-container">
-            <label for="question5">Placeholder:</label>
-            <div class="input-info-container">
-              <input
-                type="text"
-                id="question5"
-                name="question5"
-                placeholder="Your answer"
-                required
-              />
-              <span class="info-icon" title="Placeholder">&#9432;</span>
-              <div class="tooltip">Placeholder</div>
-            </div>
-            <span class="error-message" id="question5Error"></span>
-          </div>
-
-          <!-- Question 6 -->
-          <div class="question-container">
-            <label for="question6">Placeholder:</label>
+            <label for="question1">How many hours do you sleep?</label>
             <input
               type="text"
-              id="question6"
-              name="question6"
-              placeholder="Your answer"
+              id="question1"
+              name="question1"
+              placeholder="Enter multiple values separated by commas (e.g., 7, 8, 6)"
               required
             />
-            <span class="error-message" id="question6Error"></span>
+            <span class="error-message" id="question1Error"></span>
           </div>
-
-          <!-- Question 7 -->
           <div class="question-container">
-            <label for="question7">Placeholder:</label>
+            <label for="question1">How many hours do you sleep?</label>
             <input
               type="text"
-              id="question7"
-              name="question7"
-              placeholder="Your answer"
+              id="question1"
+              name="question1"
+              placeholder="Enter multiple values separated by commas (e.g., 7, 8, 6)"
               required
             />
-            <span class="error-message" id="question7Error"></span>
+            <span class="error-message" id="question1Error"></span>
           </div>
-
-          <!-- Question 8 -->
-          <div class="question-container">
-            <label for="question8">Placeholder:</label>
-            <input
-              type="text"
-              id="question8"
-              name="question8"
-              placeholder="Your answer"
-              required
-            />
-            <span class="error-message" id="question8Error"></span>
-          </div>
-
-          <!-- Question 9 -->
-          <div class="question-container">
-            <label for="question9">Placeholder:</label>
-            <input
-              type="text"
-              id="question9"
-              name="question9"
-              placeholder="Your answer"
-              required
-            />
-            <span class="error-message" id="question9Error"></span>
-          </div>
-
-          <!-- Question 10 -->
-          <div class="question-container">
-            <label for="question10">Placeholder:</label>
-            <input
-              type="text"
-              id="question10"
-              name="question10"
-              placeholder="Your answer"
-              required
-            />
-            <span class="error-message" id="question10Error"></span>
-          </div>
-
-          <!-- Question 11 -->
-          <div class="question-container">
-            <label for="question11">Placeholder:</label>
-            <input
-              type="text"
-              id="question11"
-              name="question11"
-              placeholder="Your answer"
-              required
-            />
-            <span class="error-message" id="question11Error"></span>
-          </div>
-
-          <!-- Question 12 -->
-          <div class="question-container">
-            <label for="question12"
-              >Placeholder:</label
-            >
-            <input
-              type="text"
-              id="question12"
-              name="question12"
-              placeholder="Your answer"
-              required
-            />
-            <span class="error-message" id="question5Error"></span>
-          </div>
-
-          <!-- Question 13 -->
-          <div class="question-container">
-            <label for="question13">Placeholder:</label>
-            <input
-              type="text"
-              id="question13"
-              name="question13"
-              placeholder="Your answer"
-              required
-            />
-            <span class="error-message" id="question13Error"></span>
-          </div>
-
           <button type="button" onclick="showSection('section2')">Next</button>
         </form>
       </div>
 
+      <!-- Section 2: Additional Questions -->
       <div id="section2" class="form-section" style="display: none">
         <h2>Section 2: Additional Questions</h2>
         <form>
-          
+          <div class="question-container">
+            <label for="question1">How many hours don't you sleep?</label>
+            <input
+              type="text"
+              id="question1"
+              name="question1"
+              placeholder="Enter multiple values separated by commas (e.g., 7, 8, 6)"
+              required
+            />
+            <span class="error-message" id="question1Error"></span>
+          </div>
 
           <button type="button" onclick="showSection('section1')">
             Previous
@@ -231,6 +81,7 @@
         </form>
       </div>
 
+      <!-- Section 3: Final Questions -->
       <div id="section3" class="form-section" style="display: none">
         <h2>Section 3: Final Questions</h2>
         <form>
@@ -271,7 +122,7 @@
           const inputElements = section.querySelectorAll("input[type='text']");
           inputElements.forEach((input) => {
             const questionValue = input.value.trim();
-            const errorElement = document.getElementById(`${input.id}Error`);
+            const errorElement = input.nextElementSibling;
             if (questionValue === "") {
               errorElement.textContent = "Please fill out this field";
               hasError = true;
@@ -285,8 +136,10 @@
             const inputElements =
               section.querySelectorAll("input[type='text']");
             inputElements.forEach((input) => {
-              const questionId = input.id;
-              const questionValue = input.value.trim();
+              const questionId = input.name;
+              const questionValue = input.value
+                .split(",") // Split values by comma
+                .map((value) => value.trim()); // Trim whitespace from each value
               formData.push({ id: questionId, value: questionValue });
             });
           });
