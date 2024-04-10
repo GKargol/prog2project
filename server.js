@@ -42,18 +42,21 @@ const connectToDatabase = async () => {
 
 // Login page
 app.get("/login", (req, res) => {
-  res.render("login"); // Render the login page using EJS
+  // Extract the error message from the query parameters
+  const errorMessage = req.query.error ? req.query.error : null;
+  res.render("login", { errorMessage: errorMessage });
 });
 
 // Login authentication route
-app.post("/login", async (req, res, next) => {
+app.post("/login", async (req, res) => {
   const { username, password } = req.body;
   // You would replace this with your actual user authentication logic
   if (username === "admin" && password === "password") {
     req.session.user = username;
     res.redirect("/dashboard"); // Redirect to the dashboard after successful login
   } else {
-    res.render("login", { error: "Invalid username or password" });
+    // If username or password is incorrect, redirect back to the login page with an error message
+    res.redirect("/login?error=Invalid username or password");
   }
 });
 
@@ -151,6 +154,58 @@ app.get("/dashboard", async (req, res, next) => {
       currentIndex,
       tab,
     });
+  } catch (err) {
+    // Forward the error to the error handling middleware
+    next(err);
+  }
+});
+
+// Handle DELETE requests to delete a statsheet entry
+app.delete("/deleteStatsEntry/:entryId", async (req, res, next) => {
+  try {
+    // Connect to MongoDB
+    const db = await connectToDatabase();
+
+    // Retrieve the entry ID from the request parameters
+    const entryId = req.params.entryId;
+
+    // Delete the entry from the "statsheet" collection using the provided entry ID
+    const result = await db
+      .collection("statsheet")
+      .deleteOne({ _id: new ObjectId(entryId) }); // Use ObjectId constructor correctly
+
+    // Check if the entry was successfully deleted
+    if (result.deletedCount === 1) {
+      res.sendStatus(200); // Send a success response
+    } else {
+      res.sendStatus(404); // Send a not found response if the entry was not deleted
+    }
+  } catch (err) {
+    // Forward the error to the error handling middleware
+    next(err);
+  }
+});
+
+// Handle DELETE requests to delete a form entry
+app.delete("/deleteFormsEntry/:entryId", async (req, res, next) => {
+  try {
+    // Connect to MongoDB
+    const db = await connectToDatabase();
+
+    // Retrieve the entry ID from the request parameters
+    const entryId = req.params.entryId;
+
+    // Delete the entry from the "formdata" collection using the provided entry ID
+    const result = await db
+      .collection("formdatas")
+      .deleteOne({ _id: new ObjectId(entryId) });
+
+    // Check if the entry was successfully deleted
+    if (result.deletedCount === 1) {
+      res.sendStatus(200); // Send a success response
+    } else {
+      res.sendStatus(404); // Send a not found response if the entry was not deleted
+    }
   } catch (err) {
     // Forward the error to the error handling middleware
     next(err);
