@@ -22,7 +22,7 @@
       <button class="tablinks" onclick="openTab(event, 'statsheet')">Statsheet</button>
     </div>
   
-   <!-- Form Data tab -->
+<!-- Form Data tab -->
 <div id="formdatas" class="tabcontent" <% if (tab !== 'formdatas') { %> style="display: none;" <% } %>>
   <% const currentFormIndex = currentIndex + 1; %>
   <h2>Form <%= currentFormIndex %>/<%= totalFormsCount %></h2>
@@ -38,90 +38,152 @@
     <% }); %>
   </ul>
 
- <!-- Next form input field -->
- <div>
-  <!-- Input field for next form index -->
-  <label for="nextForm">Next Form Index:</label>
-  <input type="number" id="nextForm" name="nextForm" min="1" max="<%= totalFormsCount %>" value="<%= currentFormIndex %>">
-  <!-- Button to view next form -->
-  <button onclick="viewNextForm()">View Next Form</button>
-</div>
+  <!-- Next form input field -->
+  <div>
+    <!-- Input field for next form index -->
+    <label for="nextForm">Next Form Index:</label>
+    <input type="number" id="nextForm" name="nextForm" min="1" max="<%= totalFormsCount %>" value="<%= currentFormIndex %>">
+    <!-- Button to view next form -->
+    <button onclick="viewNextForm()">View Next Form</button>
+    <!-- Delete button for deleting form entry -->
+    <button id="deleteEntryBtn" onclick="deleteForm()">Delete Entry</button>
+  </div>
 
-<script>
-  // JavaScript function to handle viewing next form
-  function viewNextForm() {
-    // Retrieve the value entered in the input field
-    let nextFormIndex = parseInt(document.getElementById("nextForm").value);
-    // Adjust the index to account for 1-based indexing
-    if (nextFormIndex === 0) {
-      nextFormIndex = 0; // Allow 0 index
-    } else {
-      nextFormIndex--; // Adjust to account for 1-based index
+  <script>
+    // JavaScript function to handle viewing next form
+    function viewNextForm() {
+      // Retrieve the value entered in the input field
+      let nextFormIndex = parseInt(document.getElementById("nextForm").value);
+      // Adjust the index to account for 1-based indexing
+      if (nextFormIndex === 0) {
+        nextFormIndex = 0; // Allow 0 index
+      } else {
+        nextFormIndex--; // Adjust to account for 1-based index
+      }
+      // Log the adjusted index to the console
+      console.log("Next Form Index:", nextFormIndex);
+      // Redirect to the dashboard page with the selected index as a query parameter and tab set to formdatas
+      window.location.href = `/dashboard?currentIndex=${nextFormIndex}&tab=formdatas`;
     }
-    // Log the adjusted index to the console
-    console.log("Next Form Index:", nextFormIndex);
-    // Redirect to the dashboard page with the selected index as a query parameter and tab set to formdatas
-    window.location.href = `/dashboard?currentIndex=${nextFormIndex}&tab=formdatas`;
-  }
-</script>
+
+    // Function to handle delete form button click with confirmation popup
+    async function deleteForm(formId) {
+      // Extract the entry ID from the first entry in formData array
+      const entryId = '<%= formData.length > 0 ? formData[0]._id : "" %>';
+      if (!entryId) {
+        alert('No entry to delete.');
+        return;
+      }
+      if (confirm('Are you sure you want to delete this entry?')) {
+        try {
+          const response = await fetch(`/deleteFormsEntry/${entryId}`, {
+            method: 'DELETE'
+          });
+          if (response.ok) {
+            window.location.reload(); // Refresh the page after successful deletion
+          } else {
+            alert('Failed to delete entry.');
+          }
+        } catch (error) {
+          console.error(error);
+          alert('An error occurred while deleting the entry.');
+        }
+      }
+    }
+  </script>
 </div>
 
-  
-  
-
-   <!-- Statsheet tab -->
-   <div id="statsheet" class="tabcontent" <% if (tab !== 'statsheet') { %> style="display: none;" <% } %>>
-    <h2>Statsheet Data</h2>
-    <table>
-      <thead>
-        <tr>
-          <th>Entry ID</th>
-          <th>Question ID</th>
-          <th>Answer</th>
-        </tr>
-      </thead>
-      <tbody>
-        <% statsData.forEach(entry => { %>
-          <% entry.questions.forEach(question => { %>
+<!-- Updated Statsheet tab -->
+<div id="statsheet" class="tabcontent" <% if (tab !== 'statsheet') { %> style="display: none;" <% } %>>
+  <h2>Statsheet Data</h2>
+  <table>
+    <thead>
+      <tr>
+        <!-- Include headers for Question ID, Answer -->
+        <th>Question ID</th>
+        <th>Answer</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% statsData.forEach(entry => { %>
+        <% entry.questions.forEach((question, questionIndex) => { %>
+          <!-- Display each question value in a separate row -->
+          <% if (Array.isArray(question.value)) { %>
+            <% question.value.forEach((value, valueIndex) => { %>
+              <tr>
+                <!-- Display the question ID -->
+                <% if (valueIndex === 0) { %>
+                  <td rowspan="<%= question.value.length %>"><%= question.id %></td>
+                <% } %>
+                <!-- Display the individual value -->
+                <td><%= value %></td>
+              </tr>
+            <% }); %>
+          <% } else { %>
             <tr>
-              <td><%= entry._id %></td>
               <td><%= question.id %></td>
               <td><%= question.value %></td>
             </tr>
-          <% }); %>
+          <% } %>
         <% }); %>
-      </tbody>
-    </table>
-  
-    <div>
-      <!-- Input field for next entry index -->
-      <label for="nextEntry">Next Entry Index:</label>
-      <input type="number" id="nextEntry" name="nextEntry" min="1" max="<%= totalStatsCount %>" value="<%= currentIndex + 1 %>">
-      <!-- Button to view next entry -->
-      <button onclick="viewNextEntry()">View Next Entry</button>
-    </div>
-    
-    <script>
-      // JavaScript function to handle viewing next entry
-      function viewNextEntry() {
-        // Retrieve the value entered in the input field
-        let nextEntryIndex = parseInt(document.getElementById("nextEntry").value);
-        // Adjust the index to account for 1-based indexing
-        if (nextEntryIndex === 0) {
-          nextEntryIndex = 0; // Allow 0 index
-        } else {
-          nextEntryIndex--; // Adjust to account for 1-based index
-        }
-        // Log the adjusted index to the console
-        console.log("Next Entry Index:", nextEntryIndex);
-        // Redirect to the dashboard page with the selected index as a query parameter and tab set to statsheet
-        window.location.href = `/dashboard?currentIndex=${nextEntryIndex}&tab=statsheet`;
+      <% }); %>
+    </tbody>
+  </table>
+
+  <div>
+    <!-- Input field for next entry index -->
+    <label for="nextEntry">Next Entry Index:</label>
+    <input type="number" id="nextEntry" name="nextEntry" min="1" max="<%= totalStatsCount %>" value="<%= currentIndex + 1 %>">
+    <!-- Button to view next entry -->
+    <button onclick="viewNextEntry()">View Next Entry</button>
+    <!-- Delete button -->
+    <button id="deleteEntryBtn" onclick="deleteEntry()">Delete Entry</button>
+  </div>
+
+  <script>
+    // JavaScript function to handle viewing next entry
+    function viewNextEntry() {
+      // Retrieve the value entered in the input field
+      let nextEntryIndex = parseInt(document.getElementById("nextEntry").value);
+      // Adjust the index to account for 1-based indexing
+      if (nextEntryIndex === 0) {
+        nextEntryIndex = 0; // Allow 0 index
+      } else {
+        nextEntryIndex--; // Adjust to account for 1-based index
       }
-    </script>
-    
+      // Log the adjusted index to the console
+      console.log("Next Entry Index:", nextEntryIndex);
+      // Redirect to the dashboard page with the selected index as a query parameter and tab set to statsheet
+      window.location.href = `/dashboard?currentIndex=${nextEntryIndex}&tab=statsheet`;
+    }
 
-
+    async function deleteEntry() {
+      // Extract the entry ID from the first entry in statsData array
+      const entryId = '<%= statsData.length > 0 ? statsData[0]._id : "" %>';
+      if (!entryId) {
+        alert('No entry to delete.');
+        return;
+      }
+      if (confirm('Are you sure you want to delete this entry?')) {
+        try {
+          const response = await fetch(`/deleteStatsEntry/${entryId}`, {
+            method: 'DELETE'
+          });
+          if (response.ok) {
+            window.location.reload(); // Refresh the page after successful deletion
+          } else {
+            alert('Failed to delete entry.');
+          }
+        } catch (error) {
+          console.error(error);
+          alert('An error occurred while deleting the entry.');
+        }
+      }
+    }
+  </script>
 </div>
+
+
 
 
   </div>
