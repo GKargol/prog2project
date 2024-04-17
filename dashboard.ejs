@@ -19,7 +19,7 @@
     <!-- Tab buttons -->
     <div class="tab">
       <button class="tablinks" onclick="openTab(event, 'formdatas')">Form Data</button>
-      <button class="tablinks" onclick="openTab(event, 'statsheet')">Statsheet Data</button>
+      <button class="tablinks" onclick="openTab(event, 'statsheet')">Statsheet</button>
     </div>
   
 <!-- Form Data tab -->
@@ -47,6 +47,7 @@
     <button onclick="viewNextForm()">View Next Form</button>
     <!-- Delete button for deleting form entry -->
     <button id="deleteEntryBtn" onclick="deleteForm()">Delete Entry</button>
+    <button onclick="window.location.href='/download-pdf?currentIndex=<%= currentIndex %>&tab=<%= tab %>'">Download PDF</button>
   </div>
 
   <script>
@@ -138,6 +139,7 @@
     <button onclick="viewNextEntry()">View Next Entry</button>
     <!-- Delete button -->
     <button id="deleteEntryBtn" onclick="deleteEntry()">Delete Entry</button>
+    <button onclick="window.location.href='/download-pdf?currentIndex=<%= currentIndex %>&tab=<%= tab %>'">Download PDF</button>
   </div>
 
   <script>
