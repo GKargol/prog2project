@@ -54,7 +54,7 @@ app.post("/login", async (req, res) => {
   // You would replace this with your actual user authentication logic
   if (username === "admin" && password === "password") {
     req.session.user = username;
-    res.redirect("/prog2project/dashboard.html"); // Redirect to the dashboard after successful login
+    res.redirect("/prog2project/dashboard.ejs"); // Redirect to the dashboard after successful login
   } else {
     // If username or password is incorrect, redirect back to the login page with an error message
     res.redirect("/prog2project/login?error=Invalid username or password");
