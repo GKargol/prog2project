@@ -4,6 +4,7 @@ const { MongoClient, ObjectId } = require("mongodb");
 const dotenv = require("dotenv");
 const bcrypt = require("bcrypt");
 const session = require("express-session");
+const PDFDocument = require("pdfkit");
 
 // Load environment variables from a .env file
 dotenv.config();
@@ -97,10 +98,10 @@ app.post("/submit2", async (req, res, next) => {
     // Connect to MongoDB
     const db = await connectToDatabase();
 
-    // Get the submitted questions as an array
-    const questions = req.body.questions;
+    // Extract the data from the request body
+    const { questions } = req.body;
 
-    // Insert the questions array into the MongoDB collection
+    // Insert each question into the MongoDB collection
     const result = await db.collection("statsheet").insertOne({ questions });
 
     // Respond with a JSON success message and the MongoDB result
@@ -209,6 +210,92 @@ app.delete("/deleteFormsEntry/:entryId", async (req, res, next) => {
   } catch (err) {
     // Forward the error to the error handling middleware
     next(err);
+  }
+});
+
+app.get("/download-pdf", async (req, res, next) => {
+  if (!req.session.user) {
+    res.redirect("/login");
+    return;
+  }
+
+  try {
+    const db = await connectToDatabase();
+    const currentIndex = parseInt(req.query.currentIndex) || 0;
+    const tab = req.query.tab || "formdatas";
+
+    let data = await db.collection(tab).findOne({}, { skip: currentIndex });
+
+    if (!data) {
+      res.status(404).send("No data available for PDF generation.");
+      return;
+    }
+
+    const doc = new PDFDocument();
+    res.setHeader("Content-Type", "application/pdf");
+    const formattedIndex = currentIndex + 1; // Human-readable index for PDF filename
+    res.setHeader(
+      "Content-Disposition",
+      `attachment; filename="${tab}-data-${formattedIndex}.pdf"`
+    );
+
+    doc
+      .fontSize(18)
+      .text(`Data for ${tab.toUpperCase()} - Entry ${formattedIndex}`, {
+        underline: true,
+      });
+    doc.fontSize(14).moveDown();
+
+    if (tab === "formdatas" && data.questions) {
+      data.questions.forEach((question) => {
+        if (question && question.id && question.value != null) {
+          doc
+            .fontSize(12)
+            .text(`${question.id}: ${question.value}`, { bold: true });
+          doc.moveDown();
+        }
+      });
+    } else if (tab === "statsheet" && data) {
+      // Validate and present statsheet data, ensure no null or undefined values
+      Object.keys(data)
+        .filter((key) => key !== "_id" && key !== "buffer")
+        .forEach((key) => {
+          const value = data[key];
+          if (value && typeof value !== "object") {
+            // Directly display simple fields
+            doc
+              .fontSize(12)
+              .text(`${key}: ${value.toString()}`, { indent: 20 });
+          } else if (
+            value &&
+            typeof value === "object" &&
+            !Array.isArray(value) &&
+            !Buffer.isBuffer(value)
+          ) {
+            // Handle object fields, ensuring not to display unwanted complex types
+            doc.fontSize(12).text(`${key}:`, { underline: true, bold: true });
+            Object.keys(value).forEach((subKey) => {
+              const subValue = value[subKey];
+              if (subValue != null) {
+                // Avoid null values
+                let displayText = Array.isArray(subValue)
+                  ? subValue.join(", ")
+                  : subValue.toString();
+                doc.text(`${subKey}: ${displayText}`, { indent: 40 });
+              }
+            });
+          }
+          doc.moveDown();
+        });
+    } else {
+      doc.text("No valid data available to display.");
+    }
+
+    doc.end();
+    doc.pipe(res);
+  } catch (err) {
+    console.error("Error generating PDF:", err);
+    res.status(500).send("Error generating PDF.");
   }
 });
 
