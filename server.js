@@ -42,14 +42,14 @@ const connectToDatabase = async () => {
 };
 
 // Login page
-app.get("/login", (req, res) => {
+app.get("prog2project/login", (req, res) => {
   // Extract the error message from the query parameters
   const errorMessage = req.query.error ? req.query.error : null;
   res.render("login", { errorMessage: errorMessage });
 });
 
 // Login authentication route
-app.post("/login", async (req, res) => {
+app.post("prog2project/login", async (req, res) => {
   const { username, password } = req.body;
   // You would replace this with your actual user authentication logic
   if (username === "admin" && password === "password") {
@@ -62,7 +62,7 @@ app.post("/login", async (req, res) => {
 });
 
 // Logout route
-app.get("/logout", (req, res) => {
+app.get("prog2project/logout", (req, res) => {
   req.session.destroy((err) => {
     if (err) {
       console.error("Error destroying session:", err);
@@ -73,7 +73,7 @@ app.get("/logout", (req, res) => {
 });
 
 // Handle POST requests to the "/submit" route
-app.post("/submit", async (req, res, next) => {
+app.post("prog2project/submit", async (req, res, next) => {
   try {
     // Connect to MongoDB
     const db = await connectToDatabase();
@@ -93,7 +93,7 @@ app.post("/submit", async (req, res, next) => {
 });
 
 // Handle POST requests to the "/submit2" route
-app.post("/submit2", async (req, res, next) => {
+app.post("prog2project/submit2", async (req, res, next) => {
   try {
     // Connect to MongoDB
     const db = await connectToDatabase();
@@ -113,7 +113,7 @@ app.post("/submit2", async (req, res, next) => {
 });
 
 // Dashboard page logic!
-app.get("/dashboard", async (req, res, next) => {
+app.get("prog2project/dashboard", async (req, res, next) => {
   // Check if user is logged in
   if (!req.session.user) {
     // If not logged in, redirect to login page
@@ -162,7 +162,7 @@ app.get("/dashboard", async (req, res, next) => {
 });
 
 // Handle DELETE requests to delete a statsheet entry
-app.delete("/deleteStatsEntry/:entryId", async (req, res, next) => {
+app.delete("prog2project/deleteStatsEntry/:entryId", async (req, res, next) => {
   try {
     // Connect to MongoDB
     const db = await connectToDatabase();
@@ -188,7 +188,7 @@ app.delete("/deleteStatsEntry/:entryId", async (req, res, next) => {
 });
 
 // Handle DELETE requests to delete a form entry
-app.delete("/deleteFormsEntry/:entryId", async (req, res, next) => {
+app.delete("prog2project/deleteFormsEntry/:entryId", async (req, res, next) => {
   try {
     // Connect to MongoDB
     const db = await connectToDatabase();
@@ -213,7 +213,7 @@ app.delete("/deleteFormsEntry/:entryId", async (req, res, next) => {
   }
 });
 
-app.get("/download-pdf", async (req, res, next) => {
+app.get("prog2project/download-pdf", async (req, res, next) => {
   if (!req.session.user) {
     res.redirect("/prog2project/login");
     return;
