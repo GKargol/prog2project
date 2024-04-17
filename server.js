@@ -54,10 +54,10 @@ app.post("/login", async (req, res) => {
   // You would replace this with your actual user authentication logic
   if (username === "admin" && password === "password") {
     req.session.user = username;
-    res.redirect("/dashboard"); // Redirect to the dashboard after successful login
+    res.redirect("/prog2project/dashboard.html"); // Redirect to the dashboard after successful login
   } else {
     // If username or password is incorrect, redirect back to the login page with an error message
-    res.redirect("/login?error=Invalid username or password");
+    res.redirect("/prog2project/login?error=Invalid username or password");
   }
 });
 
@@ -68,7 +68,7 @@ app.get("/logout", (req, res) => {
       console.error("Error destroying session:", err);
       return res.status(500).send("Internal Server Error");
     }
-    res.redirect("/login"); // Redirect to the login page after logout
+    res.redirect("/prog2project/login"); // Redirect to the login page after logout
   });
 });
 
@@ -117,7 +117,7 @@ app.get("/dashboard", async (req, res, next) => {
   // Check if user is logged in
   if (!req.session.user) {
     // If not logged in, redirect to login page
-    res.redirect("/login");
+    res.redirect("/prog2project/login");
     return;
   }
   try {
@@ -215,7 +215,7 @@ app.delete("/deleteFormsEntry/:entryId", async (req, res, next) => {
 
 app.get("/download-pdf", async (req, res, next) => {
   if (!req.session.user) {
-    res.redirect("/login");
+    res.redirect("/prog2project/login");
     return;
   }
 
