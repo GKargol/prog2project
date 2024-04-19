@@ -77,7 +77,7 @@ This document serves as the technical documentation for a Node.js web applicatio
 - `dotenv`: Loads environment variables from `.env`.
 - Other dependencies like `body-parser`, `chai`, `ejs`, `mocha`, `mongodb`, `pdfkit` provide additional functionality.
 
-## Testing Instructions
+## Testing Instructions (If downloaded ZIP file and skipped Setup Instructions)
 
 1. Download and unzip the full code.
 2. Open the folder in Visual Studio Code and trust the author if prompted.
@@ -88,3 +88,4 @@ This document serves as the technical documentation for a Node.js web applicatio
 ## Additional Notes
 
 Remember to keep dependencies up to date and test frequently for any security issues or bugs.
+If you encounter issues with PDF download, simply click "View Next Entry" to ensure the URL is set to the current entry you are viewing.
