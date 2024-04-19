@@ -5,6 +5,7 @@ const dotenv = require("dotenv");
 const bcrypt = require("bcrypt");
 const session = require("express-session");
 const PDFDocument = require("pdfkit");
+const doc = new PDFDocument();
 
 // Load environment variables from a .env file
 dotenv.config();
@@ -42,38 +43,38 @@ const connectToDatabase = async () => {
 };
 
 // Login page
-app.get("prog2project/login", (req, res) => {
+app.get("/login", (req, res) => {
   // Extract the error message from the query parameters
   const errorMessage = req.query.error ? req.query.error : null;
   res.render("login", { errorMessage: errorMessage });
 });
 
 // Login authentication route
-app.post("prog2project/login", async (req, res) => {
+app.post("/login", async (req, res) => {
   const { username, password } = req.body;
   // You would replace this with your actual user authentication logic
   if (username === "admin" && password === "password") {
     req.session.user = username;
-    res.redirect("/prog2project/dashboard.ejs"); // Redirect to the dashboard after successful login
+    res.redirect("/dashboard"); // Redirect to the dashboard after successful login
   } else {
     // If username or password is incorrect, redirect back to the login page with an error message
-    res.redirect("/prog2project/login?error=Invalid username or password");
+    res.redirect("/login?error=Invalid username or password");
   }
 });
 
 // Logout route
-app.get("prog2project/logout", (req, res) => {
+app.get("/logout", (req, res) => {
   req.session.destroy((err) => {
     if (err) {
       console.error("Error destroying session:", err);
       return res.status(500).send("Internal Server Error");
     }
-    res.redirect("/prog2project/login"); // Redirect to the login page after logout
+    res.redirect("/login"); // Redirect to the login page after logout
   });
 });
 
 // Handle POST requests to the "/submit" route
-app.post("prog2project/submit", async (req, res, next) => {
+app.post("/submit", async (req, res, next) => {
   try {
     // Connect to MongoDB
     const db = await connectToDatabase();
@@ -93,7 +94,7 @@ app.post("prog2project/submit", async (req, res, next) => {
 });
 
 // Handle POST requests to the "/submit2" route
-app.post("prog2project/submit2", async (req, res, next) => {
+app.post("/submit2", async (req, res, next) => {
   try {
     // Connect to MongoDB
     const db = await connectToDatabase();
@@ -113,11 +114,11 @@ app.post("prog2project/submit2", async (req, res, next) => {
 });
 
 // Dashboard page logic!
-app.get("prog2project/dashboard", async (req, res, next) => {
+app.get("/dashboard", async (req, res, next) => {
   // Check if user is logged in
   if (!req.session.user) {
     // If not logged in, redirect to login page
-    res.redirect("/prog2project/login");
+    res.redirect("/login");
     return;
   }
   try {
@@ -162,7 +163,7 @@ app.get("prog2project/dashboard", async (req, res, next) => {
 });
 
 // Handle DELETE requests to delete a statsheet entry
-app.delete("prog2project/deleteStatsEntry/:entryId", async (req, res, next) => {
+app.delete("/deleteStatsEntry/:entryId", async (req, res, next) => {
   try {
     // Connect to MongoDB
     const db = await connectToDatabase();
@@ -188,7 +189,7 @@ app.delete("prog2project/deleteStatsEntry/:entryId", async (req, res, next) => {
 });
 
 // Handle DELETE requests to delete a form entry
-app.delete("prog2project/deleteFormsEntry/:entryId", async (req, res, next) => {
+app.delete("/deleteFormsEntry/:entryId", async (req, res, next) => {
   try {
     // Connect to MongoDB
     const db = await connectToDatabase();
@@ -213,82 +214,107 @@ app.delete("prog2project/deleteFormsEntry/:entryId", async (req, res, next) => {
   }
 });
 
-app.get("prog2project/download-pdf", async (req, res, next) => {
+app.get("/download-pdf", async (req, res, next) => {
   if (!req.session.user) {
-    res.redirect("/prog2project/login");
+    res.redirect("/login");
     return;
   }
 
   try {
     const db = await connectToDatabase();
     const currentIndex = parseInt(req.query.currentIndex) || 0;
-    const tab = req.query.tab || "formdatas";
+    const tab = req.query.tab || "statsheet"; // Defaults to "statsheet" if no tab is specified
 
-    let data = await db.collection(tab).findOne({}, { skip: currentIndex });
+    let data = await db
+      .collection(tab)
+      .find()
+      .skip(currentIndex)
+      .limit(1)
+      .toArray();
+    data = data[0]; // Since find().toArray() returns an array
 
     if (!data) {
       res.status(404).send("No data available for PDF generation.");
       return;
     }
 
-    const doc = new PDFDocument();
     res.setHeader("Content-Type", "application/pdf");
-    const formattedIndex = currentIndex + 1; // Human-readable index for PDF filename
+    const formattedIndex = currentIndex + 1;
     res.setHeader(
       "Content-Disposition",
       `attachment; filename="${tab}-data-${formattedIndex}.pdf"`
     );
 
+    const doc = new PDFDocument();
     doc
       .fontSize(18)
+      .font("Helvetica-Bold")
       .text(`Data for ${tab.toUpperCase()} - Entry ${formattedIndex}`, {
         underline: true,
       });
-    doc.fontSize(14).moveDown();
+    doc.fontSize(14).moveDown(2);
+
+    let startX = 50;
+    let startY = doc.y;
 
     if (tab === "formdatas" && data.questions) {
+      // Simple Q&A format for form data
       data.questions.forEach((question) => {
-        if (question && question.id && question.value != null) {
+        if (question.id && question.value != null) {
+          if (startY > 650) {
+            // Check if the current position is near the bottom of the page
+            doc.addPage();
+            startY = 50; // Reset startY position for the new page
+          }
           doc
             .fontSize(12)
-            .text(`${question.id}: ${question.value}`, { bold: true });
-          doc.moveDown();
+            .font("Helvetica-Bold")
+            .text(`Question ID: ${question.id}`, { bold: true });
+          let answer = Array.isArray(question.value)
+            ? question.value.join(", ")
+            : question.value.toString();
+          doc.font("Helvetica").text(`Answer: ${answer}`, { indent: 20 });
+          startY = doc.y + 20; // Update startY after each question-answer pair
         }
       });
-    } else if (tab === "statsheet" && data) {
-      // Validate and present statsheet data, ensure no null or undefined values
-      Object.keys(data)
-        .filter((key) => key !== "_id" && key !== "buffer")
-        .forEach((key) => {
-          const value = data[key];
-          if (value && typeof value !== "object") {
-            // Directly display simple fields
+    } else if (tab === "statsheet" && data.questions) {
+      // Table-like output for statsheet data
+      data.questions.forEach((question) => {
+        if (
+          question.id &&
+          question.value &&
+          typeof question.value === "object"
+        ) {
+          if (startY > 650) {
+            // Ensure content does not overflow
+            doc.addPage();
+            startY = 50;
+          }
+          doc
+            .fontSize(12)
+            .font("Helvetica-Bold")
+            .text(`Question ID: ${question.id}`, startX, startY, {
+              underline: false,
+            });
+          startY += 20;
+          if (Array.isArray(question.value)) {
+            let answers = question.value.join(", ");
             doc
-              .fontSize(12)
-              .text(`${key}: ${value.toString()}`, { indent: 20 });
-          } else if (
-            value &&
-            typeof value === "object" &&
-            !Array.isArray(value) &&
-            !Buffer.isBuffer(value)
-          ) {
-            // Handle object fields, ensuring not to display unwanted complex types
-            doc.fontSize(12).text(`${key}:`, { underline: true, bold: true });
-            Object.keys(value).forEach((subKey) => {
-              const subValue = value[subKey];
-              if (subValue != null) {
-                // Avoid null values
-                let displayText = Array.isArray(subValue)
-                  ? subValue.join(", ")
-                  : subValue.toString();
-                doc.text(`${subKey}: ${displayText}`, { indent: 40 });
-              }
+              .fontSize(10)
+              .font("Helvetica")
+              .text(`Answers: ${answers}`, startX + 20, startY);
+          } else {
+            Object.keys(question.value).forEach((key) => {
+              doc
+                .fontSize(10)
+                .font("Helvetica")
+                .text(`${key}: ${question.value[key]}`, startX + 20, startY);
+              startY += 20;
             });
           }
-          doc.moveDown();
-        });
-    } else {
-      doc.text("No valid data available to display.");
+          startY += 30; // Additional space before next question
+        }
+      });
     }
 
     doc.end();
