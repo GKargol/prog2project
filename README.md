@@ -4,6 +4,8 @@
 
 This document serves as the technical documentation for a Node.js web application using the Express framework. It includes user authentication, session management, data handling with MongoDB, and dynamic content rendering using EJS. The application is designed to demonstrate fundamental web development concepts with Node.js.
 
+Note: This program is still in development and is currently available as a demo. Final program will be available in the coming weeks. Current username and password for the login pannel is set to "admin" and "password" to allow for demonstration. 
+
 ## System Requirements
 
 - **Node.js**: A JavaScript runtime built on Chrome's V8 JavaScript engine.
