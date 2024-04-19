@@ -8,7 +8,7 @@
 </head>
 <body>
   <div class="button-container">
-    <a href="/prog2project/" class="btn-back">Back to Form</a>
+    <a href="/" class="btn-back">Back to Form</a>
     <button id="theme-toggle">Toggle Dark Mode</button>
     <a href="/logout">Logout</a>
   </div>
@@ -25,7 +25,7 @@
 <!-- Form Data tab -->
 <div id="formdatas" class="tabcontent" <% if (tab !== 'formdatas') { %> style="display: none;" <% } %>>
   <% const currentFormIndex = currentIndex + 1; %>
-  <h2>Form <%= currentFormIndex %>/<%= totalFormsCount %></h2>
+  <h2>Form Entry <%= currentFormIndex %>/<%= totalFormsCount %></h2>
   <ul>
     <% formData.forEach(form => { %>
       <li>
@@ -96,7 +96,9 @@
 
 <!-- Updated Statsheet tab -->
 <div id="statsheet" class="tabcontent" <% if (tab !== 'statsheet') { %> style="display: none;" <% } %>>
-  <h2>Statsheet Data</h2>
+  <% const currentEntryIndex = currentIndex + 1; %>
+  <h2>Statsheet Entry <%= currentEntryIndex %>/<%= totalStatsCount %></h2>
+  <table>
   <table>
     <thead>
       <tr>
@@ -193,18 +195,24 @@
   <script>
     // JavaScript function to open the selected tab
     function openTab(evt, tabName) {
-      var i, tabcontent, tablinks;
-      tabcontent = document.getElementsByClassName("tabcontent");
-      for (i = 0; i < tabcontent.length; i++) {
+    var i, tabcontent, tablinks;
+    tabcontent = document.getElementsByClassName("tabcontent");
+    for (i = 0; i < tabcontent.length; i++) {
         tabcontent[i].style.display = "none";
-      }
-      tablinks = document.getElementsByClassName("tablinks");
-      for (i = 0; i < tablinks.length; i++) {
-        tablinks[i].className = tablinks[i].className.replace(" active", "");
-      }
-      document.getElementById(tabName).style.display = "block";
-      evt.currentTarget.className += " active";
     }
+    tablinks = document.getElementsByClassName("tablinks");
+    for (i = 0; i < tablinks.length; i++) {
+        tablinks[i].className = tablinks[i].className.replace(" active", "");
+    }
+    document.getElementById(tabName).style.display = "block";
+    evt.currentTarget.className += " active";
+
+    // Update the URL to reflect the current tab without reloading the page
+    const url = new URL(window.location);
+    url.searchParams.set('tab', tabName);  // Assuming 'tab' is the query parameter used to determine the active tab
+    history.pushState({ tab: tabName }, '', url);  // Update the URL
+}
+
   </script>
 
   <script>
