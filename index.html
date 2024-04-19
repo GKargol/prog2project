@@ -9,8 +9,8 @@
   <body>
     <!-- Add a container for the dashboard button -->
     <div class="button-container">
-      <a href="/prog2project/dashboard">Dashboard</a>
-      <a href="/prog2project/statsheet.html">Stat Sheet Form</a>
+      <a href="/dashboard">Dashboard</a>
+      <a href="/statsheet.html">Stat Sheet Form</a>
       <button id="theme-toggle">Toggle Dark Mode</button>
     </div>
 
@@ -303,19 +303,10 @@
           <button type="button" onclick="showSection('section1')">
             Previous
           </button>
-          <button type="button" onclick="showSection('section3')">Next</button>
+          <button type="button" onclick="submitForm()">Submit</button>
         </form>
       </div>
 
-      <div id="section3" class="form-section" style="display: none">
-        <h2>Section 3: Final Questions</h2>
-        <form>
-          <!-- Add more questions for section 3 if needed -->
-
-          <button type="button" onclick="showSection('section2')">
-            Previous
-          </button>
-          <button type="button" onclick="submitForm()">Submit</button>
         </form>
       </div>
     </div>
@@ -380,7 +371,7 @@
               formSections.forEach((section) => {
                 section.querySelector("form").reset();
               });
-              window.location.href = "/prog2project/submit.html"; // Redirect to submit.html upon successful submission
+              window.location.href = "/submit.html"; // Redirect to submit.html upon successful submission
             } else {
               alert("Failed to submit data to MongoDB");
             }
