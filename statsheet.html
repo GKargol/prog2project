@@ -3,75 +3,214 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Statsheet Report</title>
+    <title>Stat Sheet Report</title>
     <link rel="stylesheet" href="style.css" />
   </head>
   <body>
     <!-- Add a container for the dashboard button -->
     <div class="button-container">
-      <a href="/prog2project/dashboard.html">Dashboard</a>
-      <a href="/prog2project/index.html">Performance Form</a>
+      <a href="/dashboard">Dashboard</a>
+      <a href="/index.html">Performance Form</a>
       <button id="theme-toggle">Toggle Dark Mode</button>
     </div>
 
     <div class="container">
       <h1>Stat Sheet Form House53</h1>
-
-      <!-- Section 1: Background -->
+      
+      <!-- Section 1: Golf Basics -->
       <div id="section1" class="form-section">
-        <h2>Section 1: Background</h2>
+        <h2>Section 1: Golf Basics</h2>
+        <p style="text-align: center;">Use commas to seperate values per hole. Ex: 4,2,3...</p>
         <form>
           <div class="question-container">
-            <label for="question1">How many hours do you sleep?</label>
+            <label for="hole">Hole</label>
             <input
               type="text"
-              id="question1"
-              name="question1"
-              placeholder="Enter multiple values separated by commas (e.g., 7, 8, 6)"
+              id="hole"
+              name="hole"
+              placeholder="Enter hole number"
               required
             />
-            <span class="error-message" id="question1Error"></span>
+            <span class="error-message" id="holeError"></span>
           </div>
           <div class="question-container">
-            <label for="question1">How many hours do you sleep?</label>
+            <label for="par">Par</label>
             <input
               type="text"
-              id="question1"
-              name="question1"
-              placeholder="Enter multiple values separated by commas (e.g., 7, 8, 6)"
+              id="par"
+              name="par"
+              placeholder="Enter par value"
               required
             />
-            <span class="error-message" id="question1Error"></span>
+            <span class="error-message" id="parError"></span>
           </div>
           <div class="question-container">
-            <label for="question1">How many hours do you sleep?</label>
+            <label for="distance">Distance</label>
             <input
               type="text"
-              id="question1"
-              name="question1"
-              placeholder="Enter multiple values separated by commas (e.g., 7, 8, 6)"
+              id="distance"
+              name="distance"
+              placeholder="Enter distance"
               required
             />
-            <span class="error-message" id="question1Error"></span>
+            <span class="error-message" id="distanceError"></span>
           </div>
+          <div class="question-container">
+            <label for="score">Score</label>
+            <input
+              type="text"
+              id="score"
+              name="score"
+              placeholder="Enter score"
+              required
+            />
+            <span class="error-message" id="scoreError"></span>
+          </div>
+          <div class="question-container">
+            <label for="fairway">Fairway</label>
+            <input
+              type="text"
+              id="fairway"
+              name="fairway"
+              placeholder="Enter fairway status"
+              required
+            />
+            <span class="error-message" id="fairwayError"></span>
+          </div>
+          <div class="question-container">
+            <label for="gir">GIR (Greens in Regulation)</label>
+            <input
+              type="text"
+              id="gir"
+              name="gir"
+              placeholder="Enter GIR status"
+              required
+            />
+            <span class="error-message" id="girError"></span>
+          </div>
+
           <button type="button" onclick="showSection('section2')">Next</button>
         </form>
       </div>
 
-      <!-- Section 2: Additional Questions -->
+      <!-- Section 2: Strokes and Approaches -->
       <div id="section2" class="form-section" style="display: none">
-        <h2>Section 2: Additional Questions</h2>
+        <h2>Section 2: Strokes and Approaches</h2>
+        <p style="text-align: center;">Use commas to seperate values per hole. Ex: 4,2,3...</p>
         <form>
           <div class="question-container">
-            <label for="question1">How many hours don't you sleep?</label>
+            <label for="oobLostBall"
+              >Strokes from Out of Bounds/Lost Ball</label
+            >
             <input
               type="text"
-              id="question1"
-              name="question1"
-              placeholder="Enter multiple values separated by commas (e.g., 7, 8, 6)"
+              id="oobLostBall"
+              name="oobLostBall"
+              placeholder="Enter strokes from OOB/Lost Ball"
               required
             />
-            <span class="error-message" id="question1Error"></span>
+            <span class="error-message" id="oobLostBallError"></span>
+          </div>
+          <div class="question-container">
+            <label for="waterUnplayable">Strokes from Water/Unplayable</label>
+            <input
+              type="text"
+              id="waterUnplayable"
+              name="waterUnplayable"
+              placeholder="Enter strokes from Water/Unplayable"
+              required
+            />
+            <span class="error-message" id="waterUnplayableError"></span>
+          </div>
+          <div class="question-container">
+            <label for="penalties">Strokes from Other Penalties</label>
+            <input
+              type="text"
+              id="penalties"
+              name="penalties"
+              placeholder="Enter strokes from other penalties"
+              required
+            />
+            <span class="error-message" id="penaltiesError"></span>
+          </div>
+          <div class="question-container">
+            <label for="secondShot">Second Shot</label>
+            <input
+              type="text"
+              id="secondShot"
+              name="secondShot"
+              placeholder="Enter second shot details"
+              required
+            />
+            <span class="error-message" id="secondShotError"></span>
+          </div>
+          <div class="question-container">
+            <label for="layUp">Lay-Up</label>
+            <input
+              type="text"
+              id="layUp"
+              name="layUp"
+              placeholder="Enter lay-up details"
+              required
+            />
+            <span class="error-message" id="layUpError"></span>
+          </div>
+          <div class="question-container">
+            <label for="approachRoughTrees">Approach from Rough/Trees</label>
+            <input
+              type="text"
+              id="approachRoughTrees"
+              name="approachRoughTrees"
+              placeholder="Enter approach from rough/trees details"
+              required
+            />
+            <span class="error-message" id="approachRoughTreesError"></span>
+          </div>
+          <div class="question-container">
+            <label for="approachSand">Approach from Sand</label>
+            <input
+              type="text"
+              id="approachSand"
+              name="approachSand"
+              placeholder="Enter approach from sand details"
+              required
+            />
+            <span class="error-message" id="approachSandError"></span>
+          </div>
+          <div class="question-container">
+            <label for="approach">Approach</label>
+            <input
+              type="text"
+              id="approach"
+              name="approach"
+              placeholder="Enter approach details"
+              required
+            />
+            <span class="error-message" id="approachError"></span>
+          </div>
+          <div class="question-container">
+            <label for="distanceSecondShot">Distance on Second Shot</label>
+            <input
+              type="text"
+              id="distanceSecondShot"
+              name="distanceSecondShot"
+              placeholder="Enter distance on second shot"
+              required
+            />
+            <span class="error-message" id="distanceSecondShotError"></span>
+          </div>
+          <div class="question-container">
+            <label for="distanceApproach"
+              >Distance on Approach (After Lay-Up)</label
+            >
+            <input
+              type="text"
+              id="distanceApproach"
+              name="distanceApproach"
+              placeholder="Enter distance on approach (after lay-up)"
+              required
+            />
+            <span class="error-message" id="distanceApproachError"></span>
           </div>
 
           <button type="button" onclick="showSection('section1')">
@@ -81,19 +220,105 @@
         </form>
       </div>
 
-      <!-- Section 3: Final Questions -->
-      <div id="section3" class="form-section" style="display: none">
-        <h2>Section 3: Final Questions</h2>
-        <form>
-          <!-- Add more questions for section 3 if needed -->
-
-          <button type="button" onclick="showSection('section2')">
-            Previous
-          </button>
-          <button type="button" onclick="submitForm()">Submit</button>
-        </form>
-      </div>
+      <!-- Section 3: Putting and Final Details -->
+<div id="section3" class="form-section" style="display: none">
+  <h2>Section 3: Putting and Final Details</h2>
+  <p style="text-align: center;">Use commas to seperate values per hole. Ex: 4,2,3...</p>
+  <form>
+    <div class="question-container">
+      <label for="chippingPitching">Chipping and Pitching (inside 50 yards to edge of green)</label>
+      <input
+        type="text"
+        id="chippingPitching"
+        name="chippingPitching"
+        placeholder="Enter chipping and pitching details"
+        required
+      />
+      <span class="error-message" id="chippingPitchingError"></span>
     </div>
+    <div class="question-container">
+      <label for="sandShot">Sand Shot</label>
+      <input
+        type="text"
+        id="sandShot"
+        name="sandShot"
+        placeholder="Enter sand shot details"
+        required
+      />
+      <span class="error-message" id="sandShotError"></span>
+    </div>
+    <div class="question-container">
+      <label for="putting">Putting</label>
+      <input
+        type="text"
+        id="putting"
+        name="putting"
+        placeholder="Enter putting details"
+        required
+      />
+      <span class="error-message" id="puttingError"></span>
+    </div>
+    <div class="question-container">
+      <label for="totalPutts">Total Putts</label>
+      <input
+        type="text"
+        id="totalPutts"
+        name="totalPutts"
+        placeholder="Enter total putts"
+        required
+      />
+      <span class="error-message" id="totalPuttsError"></span>
+    </div>
+    <div class="question-container">
+      <label for="firstPuttDistance">First Putt Distance</label>
+      <input
+        type="text"
+        id="firstPuttDistance"
+        name="firstPuttDistance"
+        placeholder="Enter first putt distance"
+        required
+      />
+      <span class="error-message" id="firstPuttDistanceError"></span>
+    </div>
+    <div class="question-container">
+      <label for="secondPuttDistance">Second Putt Distance</label>
+      <input
+        type="text"
+        id="secondPuttDistance"
+        name="secondPuttDistance"
+        placeholder="Enter second putt distance"
+        required
+      />
+      <span class="error-message" id="secondPuttDistanceError"></span>
+    </div>
+    <div class="question-container">
+      <label for="thirdPuttDistance">Third Putt Distance</label>
+      <input
+        type="text"
+        id="thirdPuttDistance"
+        name="thirdPuttDistance"
+        placeholder="Enter third putt distance"
+        required
+      />
+      <span class="error-message" id="thirdPuttDistanceError"></span>
+    </div>
+    <div class="question-container">
+      <label for="fourthPuttDistance">Fourth Putt + Distance</label>
+      <input
+        type="text"
+        id="fourthPuttDistance"
+        name="fourthPuttDistance"
+        placeholder="Enter distance for fourth putt and beyond"
+        required
+      />
+      <span class="error-message" id="fourthPuttDistanceError"></span>
+    </div>
+
+    <button type="button" onclick="showSection('section2')">Previous</button>
+    <button type="button" onclick="submitForm()">Submit</button>
+  </form>
+</div>
+
 
     <script>
       function showSection(sectionId) {
