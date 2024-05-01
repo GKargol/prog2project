@@ -326,6 +326,30 @@ app.get("/download-pdf", async (req, res, next) => {
 });
 
 // Start the Express server and listen on the specified port
-app.listen(port, () => {
-  console.log(`Server is running on http://localhost:${port}`);
+const server = app.listen(port);
+
+// Event listener for handling server startup
+server.on("listening", () => {
+  console.log(`Server is now running on http://localhost:${port}`);
+});
+
+// Event listener for handling server errors
+server.on("error", (error) => {
+  if (error.syscall !== "listen") {
+    throw error;
+  }
+
+  // Handle specific listen errors with friendly messages
+  switch (error.code) {
+    case "EACCES":
+      console.error(`Port ${port} requires elevated privileges`);
+      process.exit(1);
+      break;
+    case "EADDRINUSE":
+      console.error(`Port ${port} is already in use`);
+      process.exit(1);
+      break;
+    default:
+      throw error;
+  }
 });
