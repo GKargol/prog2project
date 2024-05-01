@@ -23,6 +23,17 @@
         <p style="text-align: center;">Use commas to seperate values per hole. Ex: 4,2,3...</p>
         <form>
           <div class="question-container">
+            <label for="hole">Name:</label>
+            <input
+              type="text"
+              id="name"
+              name="name"
+              placeholder="Enter your name"
+              required
+            />
+            <span class="error-message" id="nameError"></span>
+          </div>
+          <div class="question-container">
             <label for="hole">Hole</label>
             <input
               type="text"
