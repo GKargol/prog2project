@@ -19,7 +19,7 @@
     "express-session": "^1.18.0",
     "mocha": "^10.2.0",
     "mongodb": "^6.3.0",
-    "mongoose": "^8.0.4"
+    "mongoose": "^8.0.4",
     "pdfkit": "^0.15.0"
   }
 }
