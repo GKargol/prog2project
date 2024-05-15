@@ -22,98 +22,128 @@
         <form>
           <!-- Question 1 -->
           <div class="question-container">
-            <label for="question1">Name: </label>
+            <label for="question1"
+              >Name:
+              <span class="info-icon" title="Enter your full name"
+                >&#9432;
+                <div class="tooltip">Enter your full name</div>
+              </span></label
+            >
             <div class="input-info-container">
               <input
                 type="text"
                 id="question1"
                 name="question1"
                 placeholder="Your answer"
+                pattern="[A-Za-z\s.,'-]+"
+                title="Only letters, spaces, and .,',- are allowed"
                 required
               />
-              <span class="info-icon" title="Enter your full name"
-                >&#9432;</span
-              >
-              <div class="tooltip">Enter your full name</div>
             </div>
             <span class="error-message" id="question1Error"></span>
           </div>
 
           <!-- Question 2 -->
           <div class="question-container">
-            <label for="question2">Address:</label>
+            <label for="question2"
+              >Address:
+              <span class="info-icon" title="Enter your current address"
+                >&#9432;
+                <div class="tooltip">Enter your current address</div>
+              </span></label
+            >
             <div class="input-info-container">
               <input
                 type="text"
                 id="question2"
                 name="question2"
                 placeholder="Your answer"
+                pattern="[0-9A-Za-z\s.,'-]+"
+                title="Include numbers, letters, spaces, and .,',-"
                 required
               />
-              <span class="info-icon" title="Enter your address">&#9432;</span>
-              <div class="tooltip">Enter your address</div>
             </div>
             <span class="error-message" id="question2Error"></span>
           </div>
 
           <!-- Question 3 -->
           <div class="question-container">
-            <label for="question3">Age:</label>
+            <label for="question3"
+              >Age:
+              <span class="info-icon" title="Enter your age"
+                >&#9432;
+                <div class="tooltip">Enter your age</div>
+              </span>
+            </label>
             <div class="input-info-container">
               <input
                 type="text"
                 id="question3"
                 name="question3"
                 placeholder="Your answer"
+                pattern="\d+"
+                title="Only numeric values are allowed"
                 required
               />
-              <span class="info-icon" title="Enter your age">&#9432;</span>
-              <div class="tooltip">Enter your age</div>
             </div>
             <span class="error-message" id="question3Error"></span>
           </div>
 
           <!-- Question 4 -->
           <div class="question-container">
-            <label for="question4">DOB:</label>
+            <label for="question4"
+              >DOB:
+              <span class="info-icon" title="Enter your date of birth"
+                >&#9432;
+                <div class="tooltip">Enter your date of birth</div>
+              </span></label
+            >
             <div class="input-info-container">
               <input
-                type="text"
+                type="date"
                 id="question4"
                 name="question4"
                 placeholder="Your answer"
                 required
               />
-              <span class="info-icon" title="Enter your date of birth"
-                >&#9432;</span
-              >
-              <div class="tooltip">Enter your date of birth</div>
             </div>
             <span class="error-message" id="question4Error"></span>
           </div>
 
           <!-- Question 5 -->
           <div class="question-container">
-            <label for="question5">Sex:</label>
+            <label for="question5"
+              >Sex:
+              <span class="info-icon" title="Enter your preferred gender"
+                >&#9432;
+                <div class="tooltip">Enter your preferred gender</div>
+              </span></label
+            >
             <div class="input-info-container">
               <input
                 type="text"
                 id="question5"
                 name="question5"
                 placeholder="Your answer"
+                pattern="[A-Za-z\s.,'-]+"
+                title="Only letters, spaces, and .,',- are allowed"
                 required
               />
-              <span class="info-icon" title="Enter your gender">&#9432;</span>
-              <div class="tooltip">Enter your gender</div>
             </div>
             <span class="error-message" id="question5Error"></span>
           </div>
 
           <!-- Question 6 -->
           <div class="question-container">
-            <label for="question6">Email:</label>
+            <label for="question6"
+              >Email:
+              <span class="info-icon" title="Enter your email"
+                >&#9432;
+                <div class="tooltip">Enter your email</div>
+              </span></label
+            >
             <input
-              type="text"
+              type="email"
               id="question6"
               name="question6"
               placeholder="Your answer"
@@ -124,25 +154,42 @@
 
           <!-- Question 7 -->
           <div class="question-container">
-            <label for="question7">Current Level:</label>
+            <label for="question7"
+              >Current Level:
+              <span class="info-icon" title="Enter your current golf level"
+                >&#9432;
+                <div class="tooltip">Enter your current golf level</div>
+              </span></label
+            >
             <input
               type="text"
               id="question7"
               name="question7"
               placeholder="Your answer"
+              pattern="[A-Za-z\s.,'-]+"
+              title="Only letters, spaces, and .,',- are allowed"
               required
             />
+
             <span class="error-message" id="question7Error"></span>
           </div>
 
           <!-- Question 8 -->
           <div class="question-container">
-            <label for="question8">Hdep:</label>
+            <label for="question8"
+              >Hdep:
+              <span class="info-icon" title="Enter your current handicap"
+                >&#9432;
+                <div class="tooltip">Enter your current handicap</div>
+              </span></label
+            >
             <input
               type="text"
               id="question8"
               name="question8"
               placeholder="Your answer"
+              pattern="[0-9+()-\s]+"
+              title="Only numbers, plus signs, hyphens, parentheses, and spaces are allowed"
               required
             />
             <span class="error-message" id="question8Error"></span>
@@ -150,25 +197,45 @@
 
           <!-- Question 8 -->
           <div class="question-container">
-            <label for="question9">Goal Hdep:</label>
+            <label for="question9"
+              >Goal Hdep:
+              <span class="info-icon" title="Enter your goal handicap"
+                >&#9432;
+                <div class="tooltip">Enter your goal handicap</div>
+              </span></label
+            >
             <input
               type="text"
               id="question9"
               name="question9"
               placeholder="Your answer"
+              pattern="[0-9+()-\s]+"
+              title="Only numbers, plus signs, hyphens, parentheses, and spaces are allowed"
               required
             />
             <span class="error-message" id="question9Error"></span>
           </div>
-        
+
           <!-- Question 10 -->
           <div class="question-container">
-            <label for="question10">Best Finish Last Season:</label>
+            <label for="question10"
+              >Best Finish Last Season:
+              <span
+                class="info-icon"
+                title="Enter your best finish from last season played"
+                >&#9432;
+                <div class="tooltip">
+                  Enter your best finish from last season played
+                </div>
+              </span></label
+            >
             <input
               type="text"
               id="question10"
               name="question10"
               placeholder="Your answer"
+              pattern="[A-Za-z\s.,'-]+"
+              title="Only letters, spaces, and .,',- are allowed"
               required
             />
             <span class="error-message" id="question9Error"></span>
@@ -176,12 +243,24 @@
 
           <!-- Question 11 -->
           <div class="question-container">
-            <label for="question11">Low Score Last Season:</label>
+            <label for="question11"
+              >Low Score Last Season:
+              <span
+                class="info-icon"
+                title="Enter your lowest score last season played"
+                >&#9432;
+                <div class="tooltip">
+                  Enter your lowest score last season played
+                </div>
+              </span></label
+            >
             <input
               type="text"
               id="question11"
               name="question11"
               placeholder="Your answer"
+              pattern="\d+"
+              title="Only numeric values are allowed"
               required
             />
             <span class="error-message" id="question11Error"></span>
@@ -189,12 +268,20 @@
 
           <!-- Question 12 -->
           <div class="question-container">
-            <label for="question12">Year Long Goals:</label>
+            <label for="question12"
+              >Year Long Goals:
+              <span class="info-icon" title="Enter your year long goals"
+                >&#9432;
+                <div class="tooltip">Enter your year long goals</div>
+              </span></label
+            >
             <input
               type="text"
               id="question12"
               name="question12"
               placeholder="Your answer"
+              pattern="[A-Za-z\s.,'-]+"
+              title="Only letters, spaces, and .,',- are allowed"
               required
             />
             <span class="error-message" id="question12Error"></span>
@@ -210,6 +297,8 @@
               id="question13"
               name="question13"
               placeholder="Your answer"
+              pattern="[A-Za-z\s.,'-]+"
+              title="Only letters, spaces, and .,',- are allowed"
               required
             />
             <span class="error-message" id="question13Error"></span>
@@ -223,6 +312,8 @@
               id="question14"
               name="question14"
               placeholder="Your answer"
+              pattern="[A-Za-z\s.,'-]+"
+              title="Only letters, spaces, and .,',- are allowed"
               required
             />
             <span class="error-message" id="question14Error"></span>
@@ -237,12 +328,20 @@
         <form>
           <!-- Question 15 -->
           <div class="question-container">
-            <label for="question15">Post Season Score:</label>
+            <label for="question15"
+              >Post Season Score:
+              <span class="info-icon" title="Enter your post season score"
+                >&#9432;
+                <div class="tooltip">Enter your post season score</div>
+              </span></label
+            >
             <input
               type="text"
               id="question15"
               name="question15"
               placeholder="Your answer"
+              pattern="\d+"
+              title="Only numeric values are allowed"
               required
             />
             <span class="error-message" id="question15Error"></span>
@@ -250,12 +349,20 @@
 
           <!-- Question 16 -->
           <div class="question-container">
-            <label for="question16">Off Season Score:</label>
+            <label for="question16"
+              >Off Season Score:
+              <span class="info-icon" title="Enter your off season score"
+                >&#9432;
+                <div class="tooltip">Enter your off season score</div>
+              </span></label
+            >
             <input
               type="text"
               id="question16"
               name="question16"
               placeholder="Your answer"
+              pattern="\d+"
+              title="Only numeric values are allowed"
               required
             />
             <span class="error-message" id="question16Error"></span>
@@ -263,12 +370,20 @@
 
           <!-- Question 17 -->
           <div class="question-container">
-            <label for="question17">Pre Season Score:</label>
+            <label for="question17"
+              >Pre Season Score:
+              <span class="info-icon" title="Enter your pre season score"
+                >&#9432;
+                <div class="tooltip">Enter your pre season score</div>
+              </span></label
+            >
             <input
               type="text"
               id="question17"
               name="question17"
               placeholder="Your answer"
+              pattern="\d+"
+              title="Only numeric values are allowed"
               required
             />
             <span class="error-message" id="question17Error"></span>
@@ -276,12 +391,20 @@
 
           <!-- Question 18 -->
           <div class="question-container">
-            <label for="question18">Regular Season (July-September) Score:</label>
+            <label for="question18"
+              >Regular Season (July-September) Score:
+              <span class="info-icon" title="Only for July-September"
+                >&#9432;
+                <div class="tooltip">Only for July-September</div>
+              </span></label
+            >
             <input
               type="text"
               id="question18"
               name="question18"
               placeholder="Your answer"
+              pattern="\d+"
+              title="Only numeric values are allowed"
               required
             />
             <span class="error-message" id="question18Error"></span>
@@ -289,12 +412,20 @@
 
           <!-- Question 19 -->
           <div class="question-container">
-            <label for="question19">Regular Season (October-December) Score:</label>
+            <label for="question19"
+              >Regular Season (October-December) Score:
+              <span class="info-icon" title="Only for October-December"
+                >&#9432;
+                <div class="tooltip">Only for October-December</div>
+              </span></label
+            >
             <input
               type="text"
               id="question19"
               name="question19"
               placeholder="Your answer"
+              pattern="\d+"
+              title="Only numeric values are allowed"
               required
             />
             <span class="error-message" id="question19Error"></span>
@@ -303,102 +434,150 @@
           <button type="button" onclick="showSection('section1')">
             Previous
           </button>
-          <button type="button" onclick="submitForm()">Submit</button>
+          <button type="button" onclick="showSection('section3')">Next</button>
         </form>
       </div>
 
+      <div id="section3" class="form-section" style="display: none">
+        <h2>Section 3: Final Questions</h2>
+        <form>
+          <div class="question-container">
+            <label for="question1"
+              >Anything Else?
+              <span
+                class="info-icon"
+                title="Feel free to leave any notes for the instructor"
+                >&#9432;
+                <div class="tooltip">
+                  Feel free to leave any notes for the instructor
+                </div>
+              </span></label
+            >
+            <div class="input-info-container">
+              <input
+                type="text"
+                id="question20"
+                name="question20"
+                placeholder="Anything Else You'd Like to Note"
+                pattern="[A-Za-z\s.,'-]+"
+                title="Only letters, spaces, and .,',- are allowed"
+              />
+            </div>
+            <span class="error-message" id="question20Error"></span>
+          </div>
+
+          <button type="button" onclick="showSection('section2')">
+            Previous
+          </button>
+          <button type="button" onclick="submitForm()">Submit</button>
+        </form>
+      </div>
+    </div>
+
     <script>
+      document.addEventListener("DOMContentLoaded", function () {
+        const inputs = document.querySelectorAll("input");
+        inputs.forEach((input) => {
+          input.addEventListener("blur", () => {
+            input.classList.add("touched");
+            validateInput(input);
+          });
+
+          input.addEventListener("input", () => {
+            validateInput(input);
+          });
+        });
+
+        function validateInput(input) {
+          const errorElement = document.getElementById(input.id + "Error");
+          if (!input.checkValidity() && input.classList.contains("touched")) {
+            errorElement.textContent = input.title || "Invalid input";
+          } else {
+            errorElement.textContent = "";
+          }
+        }
+
+        const themeToggle = document.getElementById("theme-toggle");
+        const isDarkMode = localStorage.getItem("darkMode") === "true";
+        if (isDarkMode) {
+          document.body.classList.add("dark-mode");
+        }
+
+        themeToggle.addEventListener("click", () => {
+          document.body.classList.toggle("dark-mode");
+          localStorage.setItem(
+            "darkMode",
+            document.body.classList.contains("dark-mode")
+          );
+        });
+      });
+
       function showSection(sectionId) {
         const sections = document.querySelectorAll(".form-section");
         sections.forEach((section) => {
-          if (section.id === sectionId) {
-            section.style.display = "block";
-          } else {
-            section.style.display = "none";
-          }
+          section.style.display = section.id === sectionId ? "block" : "none";
         });
       }
 
       async function submitForm() {
         let hasError = false;
-
-        // Reset error messages
+        const inputs = document.querySelectorAll("input[required]");
         const errorMessages = document.querySelectorAll(".error-message");
+
+        // Clear all previous error messages first
         errorMessages.forEach((errorMessage) => {
           errorMessage.textContent = "";
         });
 
-        // Validate form inputs
-        const formSections = document.querySelectorAll(".form-section");
-        formSections.forEach((section) => {
-          const inputElements = section.querySelectorAll("input[type='text']");
-          inputElements.forEach((input) => {
-            const questionValue = input.value.trim();
-            const errorElement = document.getElementById(`${input.id}Error`);
-            if (questionValue === "") {
+        inputs.forEach((input) => {
+          // Constructing the error element ID based on the input's ID
+          const errorElementId = input.id + "Error";
+          const errorElement = document.getElementById(errorElementId);
+
+          if (errorElement) {
+            // Check if the error element actually exists
+            if (!input.value.trim()) {
               errorElement.textContent = "Please fill out this field";
               hasError = true;
+            } else {
+              errorElement.textContent = ""; // Clear any existing error message if the field is now valid
             }
-          });
+          } else {
+            // Log an error if the error element does not exist (this helps in debugging)
+            console.error("Error element not found for:", errorElementId);
+          }
         });
 
-        if (!hasError) {
-          const formData = [];
-          formSections.forEach((section) => {
-            const inputElements =
-              section.querySelectorAll("input[type='text']");
-            inputElements.forEach((input) => {
-              const questionId = input.id;
-              const questionValue = input.value.trim();
-              formData.push({ id: questionId, value: questionValue });
-            });
+        if (hasError) {
+          alert("Please fill out all required fields.");
+          return; // Stop further execution if there are errors
+        }
+
+        const formData = Array.from(inputs).map((input) => ({
+          id: input.id,
+          value: input.value.trim(),
+        }));
+
+        try {
+          const response = await fetch("/submit", {
+            method: "POST",
+            body: JSON.stringify({ questions: formData }),
+            headers: { "Content-Type": "application/json" },
           });
 
-          try {
-            const response = await fetch("/submit", {
-              method: "POST",
-              body: JSON.stringify({ questions: formData }),
-              headers: {
-                "Content-Type": "application/json",
-              },
-            });
-
-            if (response.ok) {
-              formSections.forEach((section) => {
-                section.querySelector("form").reset();
-              });
-              window.location.href = "/submit.html"; // Redirect to submit.html upon successful submission
-            } else {
-              alert("Failed to submit data to MongoDB");
-            }
-          } catch (error) {
-            console.error(error);
-            alert("An error occurred while submitting the form.");
+          if (response.ok) {
+            document
+              .querySelectorAll(".form-section form")
+              .forEach((form) => form.reset());
+            window.location.href = "/submit.html";
+          } else {
+            alert("Failed to submit data.");
           }
-        } else {
-          alert("Please fill out all required fields.");
+        } catch (error) {
+          console.error(error);
+          alert("An error occurred while submitting the form.");
         }
       }
-    </script>
-    <script>
-      // Check if dark mode preference is stored in local storage
-      const isDarkMode = localStorage.getItem("darkMode") === "true";
-
-      // Set initial dark mode state based on the stored preference
-      if (isDarkMode) {
-        document.body.classList.add("dark-mode");
-      }
-
-      const themeToggle = document.getElementById("theme-toggle");
-
-      themeToggle.addEventListener("click", () => {
-        // Toggle dark mode class on the body element
-        document.body.classList.toggle("dark-mode");
-
-        // Store the dark mode preference in local storage
-        const isDarkMode = document.body.classList.contains("dark-mode");
-        localStorage.setItem("darkMode", isDarkMode.toString());
-      });
     </script>
   </body>
 </html>
