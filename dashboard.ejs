@@ -41,10 +41,10 @@
   <!-- Next form input field -->
   <div>
     <!-- Input field for next form index -->
-    <label for="nextForm">Next Form Index:</label>
+    <label for="nextForm">View Form Index:</label>
     <input type="number" id="nextForm" name="nextForm" min="1" max="<%= totalFormsCount %>" value="<%= currentFormIndex %>">
     <!-- Button to view next form -->
-    <button onclick="viewNextForm()">View Next Form</button>
+    <button onclick="viewNextForm()">View Form</button>
     <!-- Delete button for deleting form entry -->
     <button id="deleteEntryBtn" onclick="deleteForm()">Delete Entry</button>
     <button onclick="window.location.href='/download-pdf?currentIndex=<%= currentIndex %>&tab=<%= tab %>'">Download PDF</button>
@@ -135,10 +135,10 @@
 
   <div>
     <!-- Input field for next entry index -->
-    <label for="nextEntry">Next Entry Index:</label>
+    <label for="nextEntry">View Index:</label>
     <input type="number" id="nextEntry" name="nextEntry" min="1" max="<%= totalStatsCount %>" value="<%= currentIndex + 1 %>">
     <!-- Button to view next entry -->
-    <button onclick="viewNextEntry()">View Next Entry</button>
+    <button onclick="viewNextEntry()">View Entry</button>
     <!-- Delete button -->
     <button id="deleteEntryBtn" onclick="deleteEntry()">Delete Entry</button>
     <button onclick="window.location.href='/download-pdf?currentIndex=<%= currentIndex %>&tab=<%= tab %>'">Download PDF</button>
@@ -156,7 +156,7 @@
         nextEntryIndex--; // Adjust to account for 1-based index
       }
       // Log the adjusted index to the console
-      console.log("Next Entry Index:", nextEntryIndex);
+      console.log("View Entry Index:", nextEntryIndex);
       // Redirect to the dashboard page with the selected index as a query parameter and tab set to statsheet
       window.location.href = `/dashboard?currentIndex=${nextEntryIndex}&tab=statsheet`;
     }
