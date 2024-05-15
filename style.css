@@ -48,6 +48,45 @@ input[type="text"] {
   font-size: 16px;
 }
 
+input[type="date"] {
+  width: 96%; /* Matching the width with text inputs */
+  padding: 10px; /* Uniform padding */
+  margin: 4px 0; /* Consistent margin */
+  border: 1px solid #ccc; /* Consistent border styling */
+  border-radius: 4px; /* Rounded borders like other inputs */
+  font-size: 16px; /* Matching font size */
+  background-color: white; /* Ensuring the background matches other inputs */
+}
+
+input[type="email"],
+input[type="date"] {
+  display: block; /* Ensuring block level for proper alignment */
+  width: 96%; /* Ensuring full width */
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  font-size: 16px;
+}
+
+input[type="email"]:focus,
+input[type="date"]:focus {
+  border-color: #4caf50; /* Green border on focus */
+}
+
+input[type="text"]:invalid:not(:placeholder-shown),
+input[type="email"]:invalid:not(:placeholder-shown) {
+  border-color: red; /* Red border for inputs that are not empty but invalid */
+}
+
+input[type="text"].touched:invalid,
+input[type="email"].touched:invalid {
+  border-color: red; /* Red border for inputs marked as touched and invalid */
+}
+input.touched:invalid {
+  border-color: red; /* Red border for inputs that are invalid after being touched */
+}
+
+/* Additional styles for the error messages to be more noticeable */
 .error-message {
   color: red;
   font-size: 14px;
@@ -64,29 +103,31 @@ input[type="text"] {
   flex: 1; /* Take remaining space */
 }
 
-.info-icon {
-  margin-left: 10px; /* Adjust as needed */
-  cursor: pointer; /* Change cursor to pointer */
-}
-
 /* Adjust the tooltip styling */
 
-.tooltip {
-  position: absolute;
-  top: 50%; /* Center vertically */
-  left: calc(100% + 5px); /* Adjusted position to the right of the info icon */
-  transform: translateY(-50%); /* Center vertically */
-  background-color: #333; /* Dark background color */
-  color: #fff; /* White text color */
-  padding: 5px; /* Add padding */
-  border-radius: 4px; /* Add border radius */
-  font-size: 14px; /* Font size */
-  display: none; /* Hide by default */
-  width: auto; /* Make the width dynamic */
+.info-icon {
+  display: inline-flex; /* Ensures the icon and tooltip align properly */
+  align-items: center; /* Aligns tooltip vertically with the icon */
+  position: relative; /* Needed for absolute positioning of the tooltip */
+  cursor: pointer;
 }
 
-.info-icon:hover + .tooltip {
-  display: block; /* Show on hover */
+.tooltip {
+  display: none;
+  position: absolute;
+  top: 0; /* Aligns tooltip at the top of the icon */
+  left: 20px; /* Adjust this value as needed to position the tooltip to the right */
+  padding: 5px 10px;
+  background-color: #333;
+  color: #fff;
+  border-radius: 4px;
+  white-space: nowrap;
+  font-size: 14px;
+  z-index: 100; /* Ensures the tooltip appears above all other content */
+}
+
+.info-icon:hover .tooltip {
+  display: block; /* Display the tooltip on hover */
 }
 
 button {
@@ -191,14 +232,22 @@ input[type="number"] {
 }
 
 .dark-mode input[type="text"],
-.dark-mode input[type="number"] {
-  background-color: rgb(
-    90,
-    90,
-    90
-  ); /* Darker background color for text inputs */
-  color: rgb(201, 201, 201); /* Light text color for text inputs */
-  border-color: rgb(100, 100, 100); /* Darker border color for text inputs */
+.dark-mode input[type="email"],
+.dark-mode input[type="date"] {
+  background-color: #333; /* Dark background */
+  color: #fff; /* Light text */
+  border-color: #555; /* Darker border for visibility */
+}
+
+/* Additional dark mode styles */
+.dark-mode {
+  background-color: #282828; /* Darker background for the body */
+  color: #ccc; /* Lighter text color for readability */
+}
+
+.dark-mode .form-section {
+  background-color: #333; /* Darker background for sections */
+  color: #ccc; /* Light text color */
 }
 
 .dark-mode .error-message {
